@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 3 IDP Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            margin: auto;
+            box-shadow: 0px 0px 10px gray;
+            border-radius: 5px;
+            position: relative;
+        }
+        h1 {
+            text-align: center;
+        }
+        .question-count {
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .progress-bar-container {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .progress-bar {
+            height: 10px;
+            background-color: green;
+            width: 0%;
+            border-radius: 5px;
+            transition: width 0.5s;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            min-height: 60px; /* Prevents button shifting */
+        }
+        .options {
+            min-height: 100px; /* Prevents button movement */
+        }
+        .options label {
+            display: block;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        .correct {
+            background-color: lightgreen;
+        }
+        .incorrect {
+            background-color: lightcoral;
+        }
+        .score {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:disabled {
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Health & Hygiene Quiz</h1>
+        <p id="question-count" class="question-count"></p>
+        <div class="progress-bar-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <div id="quiz-container"></div>
+        <div class="buttons">
+            <button id="prev-btn" onclick="prevQuestion()" disabled>Previous</button>
+            <button onclick="checkAnswers()">Check my response</button>
+            <button id="next-btn" onclick="nextQuestion()" style="display:none;">Next</button>
+        </div>
+        <p id="score" class="score"></p>
+    </div>
+
+    <script>
+        let currentQuestionIndex = 0;
+        let questions = [];
+        let questionScores = []; // Stores individual question scores
+        let correctSelections = 0;
+        let totalCorrectPossible = 0;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("idpquestions.json")
+                .then(response => response.json())
+                .then(data => {
+                    questions = shuffleArray(data.questions); // Shuffle questions for randomness
+                    loadQuestion();
+                });
+        });
+
+        function shuffleArray(array) {
+            return array.sort(() => Math.random() - 0.5); // Random order of questions
+        }
+
+        function loadQuestion() {
+            let quizContainer = document.getElementById("quiz-container");
+            let questionCount = document.getElementById("question-count");
+            let progressBar = document.getElementById("progress-bar");
+
+            if (currentQuestionIndex >= questions.length) {
+                quizContainer.innerHTML = "<p>Quiz Completed!</p>";
+                let cumulativeScore = (questionScores.reduce((a, b) => a + b, 0) / questionScores.length).toFixed(2);
+                document.getElementById("score").innerHTML = 
+                    `Final Score:<br>📊 Cumulative Percentage: ${cumulativeScore}%`;
+                document.querySelector("button[onclick='checkAnswers()']").style.display = "none";
+                document.getElementById("next-btn").style.display = "none";
+                document.getElementById("prev-btn").style.display = "none";
+                progressBar.style.width = "100%";
+                return;
+            }
+
+            progressBar.style.width = `${(currentQuestionIndex / questions.length) * 100}%`;
+
+            let q = questions[currentQuestionIndex];
+            quizContainer.innerHTML = "";
+
+            questionCount.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+
+            let questionTitle = document.createElement("p");
+            questionTitle.classList.add("question");
+            questionTitle.textContent = q.question;
+
+            let optionsDiv = document.createElement("div");
+            optionsDiv.classList.add("options");
+
+            totalCorrectPossible = 0;
+            q.options.forEach((opt, optIndex) => {
+                let label = document.createElement("label");
+                label.innerHTML = `<input type="checkbox" data-index="${optIndex}"> ${opt.text}`;
+                optionsDiv.appendChild(label);
+                if (opt.correct) totalCorrectPossible++;
+            });
+
+            quizContainer.appendChild(questionTitle);
+            quizContainer.appendChild(optionsDiv);
+            questionTitle.style.opacity = "1"; // Fade-in effect
+        }
+
+        function checkAnswers() {
+            let q = questions[currentQuestionIndex];
+            let checkboxes = document.querySelectorAll("#quiz-container input[type='checkbox']");
+            let anyChecked = false;
+            let correctSelected = 0;
+
+            checkboxes.forEach((checkbox, index) => {
+                if (checkbox.checked) {
+                    anyChecked = true;
+                }
+            });
+
+            if (!anyChecked) {
+                alert("Please select at least one option before proceeding.");
+                return; // Stop if no selection is made
+            }
+
+            checkboxes.forEach((checkbox, index) => {
+                let isCorrect = q.options[index].correct;
+                if (checkbox.checked) {
+                    if (isCorrect) {
+                        checkbox.parentElement.classList.add("correct");
+                        correctSelected++;
+                    } else {
+                        checkbox.parentElement.classList.add("incorrect");
+                    }
+                }
+            });
+
+            let questionScore = ((correctSelected / totalCorrectPossible) * 100).toFixed(2);
+            questionScores[currentQuestionIndex] = parseFloat(questionScore);
+
+            let cumulativeScore = (questionScores.reduce((a, b) => a + b, 0) / questionScores.length).toFixed(2);
+
+            document.getElementById("score").innerHTML = 
+                `✅ Current Question Score: ${questionScore}%<br>📊 Cumulative Score: ${cumulativeScore}%`;
+
+            document.querySelector("button[onclick='checkAnswers()']").style.display = "none";
+            document.getElementById("next-btn").style.display = "inline-block";
+            document.getElementById("prev-btn").disabled = false;
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            document.getElementById("prev-btn").disabled = currentQuestionIndex === 0;
+            document.querySelector("button[onclick='checkAnswers()']").style.display = "inline-block";
+            document.getElementById("next-btn").style.display = "none";
+            loadQuestion();
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                document.getElementById("prev-btn").disabled = currentQuestionIndex === 0;
+                document.getElementById("next-btn").style.display = "inline-block";
+                document.querySelector("button[onclick='checkAnswers()']").style.display = "none";
+                loadQuestion();
+            }
+        }
+    </script>
+</body>
+</html>

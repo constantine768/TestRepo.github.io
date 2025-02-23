@@ -1,0 +1,354 @@
+{
+  "questions": [
+    {
+      "question": "What are some daily habits that help maintain good personal hygiene?",
+      "options": [
+        {"text": "Brushing teeth twice a day", "correct": true},
+        {"text": "Bathing regularly", "correct": true},
+        {"text": "Washing hands before meals and after using the toilet", "correct": true},
+        {"text": "Wearing clean clothes", "correct": true},
+        {"text": "Skipping showers to save water", "correct": false},
+        {"text": "Reusing the same unwashed clothes daily", "correct": false}
+      ]
+    },
+    {
+      "question": "Why is brushing your teeth twice a day important?",
+      "options": [
+        {"text": "Prevents cavities and tooth decay", "correct": true},
+        {"text": "Removes food particles and plaque", "correct": true},
+        {"text": "Keeps breath fresh", "correct": true},
+        {"text": "Reduces the risk of gum disease", "correct": true},
+        {"text": "Brushing once a month is enough to keep teeth healthy", "correct": false},
+        {"text": "Using only mouthwash is a substitute for brushing", "correct": false}
+      ]
+    },
+    {
+      "question": "How can washing hands with soap and water prevent illnesses?",
+      "options": [
+        {"text": "Removes harmful bacteria and viruses", "correct": true},
+        {"text": "Reduces the risk of infections like flu and stomach bugs", "correct": true},
+        {"text": "Prevents the spread of germs to others", "correct": true},
+        {"text": "Makes hands smell nice but does not remove germs", "correct": false},
+        {"text": "Washing only with water is just as effective as soap", "correct": false}
+      ]
+    },
+    {
+      "question": "What are the signs of dehydration?",
+      "options": [
+        {"text": "Dry mouth and lips", "correct": true},
+        {"text": "Feeling dizzy or lightheaded", "correct": true},
+        {"text": "Dark-colored urine", "correct": true},
+        {"text": "Fatigue or weakness", "correct": true},
+        {"text": "Increased energy and alertness", "correct": false},
+        {"text": "Clear urine at all times", "correct": false}
+      ]
+    },
+    {
+      "question": "What changes can a person make to include more physical activity in their daily routine?",
+      "options": [
+        {"text": "Taking the stairs instead of the elevator", "correct": true},
+        {"text": "Walking or biking to nearby places", "correct": true},
+        {"text": "Playing outdoor games", "correct": true},
+        {"text": "Doing simple exercises at home", "correct": true},
+        {"text": "Sitting for long hours without movement", "correct": false},
+        {"text": "Watching TV all day instead of engaging in activities", "correct": false}
+      ]
+    },
+    {
+      "question": "What are some common symptoms of the flu?",
+      "options": [
+        {"text": "Fever and chills", "correct": true},
+        {"text": "Cough and sore throat", "correct": true},
+        {"text": "Runny or stuffy nose", "correct": true},
+        {"text": "Body aches and fatigue", "correct": true},
+        {"text": "Sudden hair loss", "correct": false},
+        {"text": "Improved appetite and digestion", "correct": false}
+      ]
+    },
+    {
+      "question": "How can a person prevent catching a cold during winter?",
+      "options": [
+        {"text": "Wearing warm clothes", "correct": true},
+        {"text": "Washing hands frequently", "correct": true},
+        {"text": "Avoiding close contact with sick people", "correct": true},
+        {"text": "Eating a balanced diet to strengthen the immune system", "correct": true},
+        {"text": "Staying outside in cold weather without warm clothing", "correct": false},
+        {"text": "Drinking only cold beverages in winter", "correct": false}
+      ]
+    },
+    {
+      "question": "Why should you avoid scratching chickenpox rashes?",
+      "options": [
+        {"text": "Scratching can lead to infections", "correct": true},
+        {"text": "May cause permanent scars", "correct": true},
+        {"text": "Increases the risk of spreading the virus", "correct": true},
+        {"text": "Helps heal the rash faster", "correct": false},
+        {"text": "Makes the rash disappear quicker", "correct": false}
+      ]
+    },
+    {
+      "question": "How does poor dental hygiene lead to cavities?",
+      "options": [
+        {"text": "Bacteria in the mouth produce acid that damages tooth enamel", "correct": true},
+        {"text": "Plaque buildup leads to tooth decay", "correct": true},
+        {"text": "Not brushing or flossing allows food particles to remain in the mouth", "correct": true},
+        {"text": "Brushing your teeth once a month is enough", "correct": false},
+        {"text": "Drinking only sugary drinks prevents cavities", "correct": false}
+      ]
+    },
+    {
+      "question": "Why is it important to complete vaccinations as recommended by doctors?",
+      "options": [
+        {"text": "Protects against serious diseases", "correct": true},
+        {"text": "Helps prevent the spread of infections", "correct": true},
+        {"text": "Strengthens the immune system", "correct": true},
+        {"text": "Vaccinations are unnecessary as the body fights off all diseases naturally", "correct": false},
+        {"text": "Vaccines make people permanently sick", "correct": false}
+      ]
+    },
+    {
+      "question": "Why should we use helmets while riding a bicycle?",
+      "options": [
+        {"text": "Protects the head from injuries", "correct": true},
+        {"text": "Reduces the risk of severe brain damage in case of an accident", "correct": true},
+        {"text": "Follows safety regulations", "correct": true},
+        {"text": "Helmets make riding uncomfortable and should be avoided", "correct": false},
+        {"text": "Wearing a helmet slows down the bicycle", "correct": false}
+      ]
+    },
+    {
+      "question": "What should you do if you find a bottle of cleaning liquid at home?",
+      "options": [
+        {"text": "Do not touch or open it", "correct": true},
+        {"text": "Inform an adult immediately", "correct": true},
+        {"text": "Store it in a safe place away from children", "correct": true},
+        {"text": "Smell or taste it to check if it’s dangerous", "correct": false},
+        {"text": "Pour it out to see how it reacts", "correct": false}
+      ]
+    },
+    {
+      "question": "Why is it important to be careful around sharp objects like knives?",
+      "options": [
+        {"text": "Prevents accidental cuts or injuries", "correct": true},
+        {"text": "Ensures safe handling of kitchen tools", "correct": true},
+        {"text": "Reduces the risk of infections from open wounds", "correct": true},
+        {"text": "Sharp objects are harmless and do not cause injuries", "correct": false},
+        {"text": "Playing with knives can be fun if done carefully", "correct": false}
+      ]
+    },
+    {
+      "question": "How can one stay safe when using the internet?",
+      "options": [
+        {"text": "Never share personal information online", "correct": true},
+        {"text": "Avoid clicking on unknown links or downloads", "correct": true},
+        {"text": "Use strong passwords and keep them private", "correct": true},
+        {"text": "Report suspicious activity to a trusted adult", "correct": true},
+        {"text": "Share passwords with friends to keep them safe", "correct": false},
+        {"text": "Respond to every message from strangers", "correct": false}
+      ]
+    }
+,
+    {
+      "question": "What are some benefits of drinking enough water daily?",
+      "options": [
+        {"text": "Keeps the body hydrated", "correct": true},
+        {"text": "Helps in digestion and nutrient absorption", "correct": true},
+        {"text": "Flushes out toxins", "correct": true},
+        {"text": "Makes you immune to all diseases", "correct": false},
+        {"text": "Drinking too much water can replace the need for food", "correct": false}
+      ]
+    },
+    {
+      "question": "Which habits help prevent bad breath?",
+      "options": [
+        {"text": "Brushing and flossing daily", "correct": true},
+        {"text": "Drinking plenty of water", "correct": true},
+        {"text": "Cleaning your tongue regularly", "correct": true},
+        {"text": "Eating only sugary foods", "correct": false},
+        {"text": "Avoiding mouthwash completely", "correct": false}
+      ]
+    },
+    {
+      "question": "What should you do to maintain good posture?",
+      "options": [
+        {"text": "Sit up straight while working or studying", "correct": true},
+        {"text": "Adjust your computer screen to eye level", "correct": true},
+        {"text": "Use a supportive chair when sitting for long hours", "correct": true},
+        {"text": "Carry heavy backpacks on one shoulder", "correct": false},
+        {"text": "Slouch while sitting to feel comfortable", "correct": false}
+      ]
+    },
+    {
+      "question": "Why is getting enough sleep important?",
+      "options": [
+        {"text": "Improves concentration and learning ability", "correct": true},
+        {"text": "Helps the body repair and grow", "correct": true},
+        {"text": "Boosts the immune system", "correct": true},
+        {"text": "Sleeping too much makes you stronger", "correct": false},
+        {"text": "You can replace sleep by drinking coffee", "correct": false}
+      ]
+    },
+    {
+      "question": "Which of the following habits help prevent eye strain?",
+      "options": [
+        {"text": "Taking breaks from screen time", "correct": true},
+        {"text": "Using proper lighting while reading", "correct": true},
+        {"text": "Blinking often to keep eyes moist", "correct": true},
+        {"text": "Staring at screens for long hours", "correct": false},
+        {"text": "Holding books or screens too close to your face", "correct": false}
+      ]
+    },
+    {
+      "question": "What are some signs of food poisoning?",
+      "options": [
+        {"text": "Stomach pain and nausea", "correct": true},
+        {"text": "Vomiting and diarrhea", "correct": true},
+        {"text": "Fever and weakness", "correct": true},
+        {"text": "Increased energy and excitement", "correct": false},
+        {"text": "Improved digestion and appetite", "correct": false}
+      ]
+    },
+    {
+      "question": "How can you prevent the spread of head lice?",
+      "options": [
+        {"text": "Avoid sharing combs and hats with others", "correct": true},
+        {"text": "Keep hair clean and neatly tied", "correct": true},
+        {"text": "Regularly check for lice if exposed to someone with them", "correct": true},
+        {"text": "Scratching your scalp frequently", "correct": false},
+        {"text": "Using the same hairbrush as everyone in your family", "correct": false}
+      ]
+    },
+    {
+      "question": "What should you do if you have an upset stomach?",
+      "options": [
+        {"text": "Drink plenty of water and rest", "correct": true},
+        {"text": "Eat light, easy-to-digest foods like bananas or rice", "correct": true},
+        {"text": "Avoid greasy or spicy foods", "correct": true},
+        {"text": "Eat more fast food to settle your stomach", "correct": false},
+        {"text": "Ignore it and continue eating as usual", "correct": false}
+      ]
+    },
+    {
+      "question": "Which of the following can cause allergies?",
+      "options": [
+        {"text": "Pollen and dust mites", "correct": true},
+        {"text": "Certain foods like nuts or dairy", "correct": true},
+        {"text": "Pet hair or fur", "correct": true},
+        {"text": "Drinking too much water", "correct": false},
+        {"text": "Reading books for too long", "correct": false}
+      ]
+    },
+    {
+      "question": "Which actions help reduce the risk of ear infections?",
+      "options": [
+        {"text": "Drying ears properly after swimming or bathing", "correct": true},
+        {"text": "Avoiding inserting objects like cotton swabs into the ear", "correct": true},
+        {"text": "Treating colds properly to prevent ear infections", "correct": true},
+        {"text": "Listening to music at maximum volume with headphones", "correct": false},
+        {"text": "Pouring water into the ear to clean it daily", "correct": false}
+      ]
+    },
+    {
+      "question": "Which actions help you stay safe when walking alone outside?",
+      "options": [
+        {"text": "Walk in well-lit areas", "correct": true},
+        {"text": "Stay aware of your surroundings", "correct": true},
+        {"text": "Keep your phone charged in case of emergencies", "correct": true},
+        {"text": "Talk to strangers if they seem friendly", "correct": false},
+        {"text": "Walk while looking at your phone the entire time", "correct": false}
+      ]
+    },
+    {
+      "question": "How can you prevent burns while cooking?",
+      "options": [
+        {"text": "Use oven mitts or gloves when handling hot objects", "correct": true},
+        {"text": "Keep flammable materials away from the stove", "correct": true},
+        {"text": "Turn pot handles inward to prevent spills", "correct": true},
+        {"text": "Touch the stove to check if it’s hot", "correct": false},
+        {"text": "Leave cooking unattended for long periods", "correct": false}
+      ]
+    },
+    {
+      "question": "What should you do if you get a minor cut?",
+      "options": [
+        {"text": "Wash the wound with clean water and soap", "correct": true},
+        {"text": "Apply antiseptic and cover with a bandage", "correct": true},
+        {"text": "Keep the wound clean and dry", "correct": true},
+        {"text": "Rub dirt on it to help it heal faster", "correct": false},
+        {"text": "Leave the wound open and ignore it", "correct": false}
+      ]
+    },
+    {
+      "question": "How can you stay safe in case of a fire emergency?",
+      "options": [
+        {"text": "Stay low to avoid smoke inhalation", "correct": true},
+        {"text": "Use the nearest exit quickly and safely", "correct": true},
+        {"text": "Call for help and alert others", "correct": true},
+        {"text": "Hide under a bed and wait for the fire to go away", "correct": false},
+        {"text": "Open all doors and windows to let in more air", "correct": false}
+      ]
+    },
+    {
+      "question": "Which of the following are safe internet practices?",
+      "options": [
+        {"text": "Using strong, unique passwords", "correct": true},
+        {"text": "Keeping personal information private", "correct": true},
+        {"text": "Only talking to people you know in real life online", "correct": true},
+        {"text": "Accepting friend requests from strangers", "correct": false},
+        {"text": "Clicking on every link sent to you", "correct": false}
+      ]
+    },
+    {
+      "question": "What are the benefits of eating a balanced diet?",
+      "options": [
+        {"text": "Provides essential nutrients for the body", "correct": true},
+        {"text": "Helps maintain a healthy weight", "correct": true},
+        {"text": "Keeps energy levels stable", "correct": true},
+        {"text": "Eating only junk food keeps you strong", "correct": false},
+        {"text": "Skipping meals helps improve digestion", "correct": false}
+      ]
+    },
+    {
+      "question": "Why is regular exercise important?",
+      "options": [
+        {"text": "Strengthens muscles and bones", "correct": true},
+        {"text": "Improves mood and mental health", "correct": true},
+        {"text": "Boosts overall energy levels", "correct": true},
+        {"text": "Watching TV all day is a good replacement for exercise", "correct": false},
+        {"text": "Exercise makes you weaker over time", "correct": false}
+      ]
+    },
+    {
+      "question": "Which habits help boost the immune system?",
+      "options": [
+        {"text": "Getting enough sleep", "correct": true},
+        {"text": "Eating fruits and vegetables", "correct": true},
+        {"text": "Staying physically active", "correct": true},
+        {"text": "Avoiding fresh air and sunlight", "correct": false},
+        {"text": "Only taking vitamins without any other healthy habits", "correct": false}
+      ]
+    },
+    {
+      "question": "How can you keep your surroundings clean?",
+      "options": [
+        {"text": "Throwing trash in designated bins", "correct": true},
+        {"text": "Washing hands after handling garbage", "correct": true},
+        {"text": "Cleaning up after yourself regularly", "correct": true},
+        {"text": "Littering when no one is watching", "correct": false},
+        {"text": "Leaving dirty dishes and clothes lying around", "correct": false}
+      ]
+    },
+    {
+      "question": "Why is stretching important before physical activity?",
+      "options": [
+        {"text": "Prevents injuries and improves flexibility", "correct": true},
+        {"text": "Prepares muscles for movement", "correct": true},
+        {"text": "Increases blood circulation", "correct": true},
+        {"text": "Stretching is unnecessary for any physical activity", "correct": false},
+        {"text": "Stretching makes muscles weaker", "correct": false}
+      ]
+    }
+
+
+  ]
+}
