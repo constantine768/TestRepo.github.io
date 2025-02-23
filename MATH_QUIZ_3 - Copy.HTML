@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 3 Visual Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        button {
+            font-size: 16px;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            min-width: 100px;
+        }
+        button.correct {
+            background-color: green;
+        }
+        button.wrong {
+            background-color: red;
+        }
+        .pattern-container img, .chart-container img {
+            max-width: 200px;
+        }
+        .indicator {
+            font-size: 20px;
+            margin-left: 10px;
+            color: red;
+        }
+        #score-container {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Grade 3 Visual Quiz</h2>
+        <table id="quiz"></table>
+        <div id="score-container"></div>
+    </div>
+
+    <script>
+        let correctAnswers = 0;
+        let wrongAnswers = 0;
+        let totalQuestions = 4;
+        
+        const questions = [
+            { 
+                type: "pattern", 
+                question: "What comes next in the pattern?", 
+                image: "https://via.placeholder.com/100?text=🟥🟦🟥🟦?", 
+                options: ["🟦", "🟥", "🟨", "⬛"], 
+                answer: "🟥" 
+            },
+            { 
+                type: "data", 
+                question: "Which fruit was sold the most?", 
+                image: "https://via.placeholder.com/200x100?text=Bar+Graph", 
+                options: ["Apples", "Bananas", "Oranges", "Grapes"], 
+                answer: "Apples" 
+            }
+        ];
+
+        function loadQuiz() {
+            const quizTable = document.getElementById("quiz");
+            quizTable.innerHTML = "<tr><th>Question</th><th>Options</th></tr>";
+            
+            questions.forEach((q, index) => {
+                let row = document.createElement("tr");
+                let questionCell = document.createElement("td");
+                questionCell.innerHTML = `<p>${q.question}</p>`;
+                if (q.image) {
+                    questionCell.innerHTML += `<div><img src="${q.image}" alt="Question Image"></div>`;
+                }
+                row.appendChild(questionCell);
+                
+                let optionsCell = document.createElement("td");
+                q.options.forEach(option => {
+                    let btn = document.createElement("button");
+                    btn.textContent = option;
+                    btn.onclick = function () {
+                        if (q.answered) return;
+                        q.answered = true;
+                        
+                        if (option === q.answer) {
+                            btn.classList.add("correct");
+                            correctAnswers++;
+                        } else {
+                            btn.classList.add("wrong");
+                            wrongAnswers++;
+                            
+                            row.querySelectorAll("button").forEach(b => {
+                                if (b.textContent === q.answer) {
+                                    b.classList.add("correct");
+                                }
+                            });
+                        }
+                        
+                        if (correctAnswers + wrongAnswers === totalQuestions) {
+                            showScore();
+                        }
+                    };
+                    optionsCell.appendChild(btn);
+                });
+                row.appendChild(optionsCell);
+                quizTable.appendChild(row);
+            });
+        }
+
+        function showScore() {
+            let percentage = ((correctAnswers / totalQuestions) * 100).toFixed(2);
+            document.getElementById("score-container").innerHTML = 
+                `<p>Correct Answers: ${correctAnswers}</p>
+                 <p>Wrong Answers: ${wrongAnswers}</p>
+                 <p>Score Percentage: ${percentage}%</p>`;
+        }
+
+        window.onload = loadQuiz;
+    </script>
+</body>
+</html>

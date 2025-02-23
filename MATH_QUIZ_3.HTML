@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 3 Mixed Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        button {
+            font-size: 16px;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            min-width: 100px;
+        }
+        button.correct {
+            background-color: green;
+        }
+        button.wrong {
+            background-color: red;
+        }
+        .indicator {
+            font-size: 20px;
+            margin-left: 10px;
+            color: red;
+        }
+        #score-container {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Grade 3 Mixed Quiz</h2>
+        <table id="quiz"></table>
+        <div id="score-container"></div>
+    </div>
+
+    <script>
+        let correctAnswers = 0;
+        let wrongAnswers = 0;
+        let totalQuestions = 10;
+        
+        const questions = [
+            { question: "Which unit is used to measure weight?", options: ["Liters", "Grams", "Meters", "Celsius"], answer: "Grams" },
+            { question: "What is 12 ÷ 4?", options: ["3", "4", "6", "8"], answer: "3" },
+            { question: "What fraction represents half?", options: ["1/2", "1/3", "1/4", "2/3"], answer: "1/2" },
+            { question: "What comes next in the pattern? 2, 4, 6, 8, ?", options: ["9", "10", "11", "12"], answer: "10" },
+            { question: "Which shape has three sides?", options: ["Square", "Rectangle", "Triangle", "Circle"], answer: "Triangle" },
+            { question: "What is 24 ÷ 6?", options: ["3", "4", "5", "6"], answer: "4" },
+            { question: "How many grams are in 1 kilogram?", options: ["10", "100", "1000", "10000"], answer: "1000" },
+            { question: "What is half of 16?", options: ["6", "7", "8", "9"], answer: "8" },
+            { question: "What comes next in the pattern? 5, 10, 15, 20, ?", options: ["22", "25", "30", "35"], answer: "25" },
+            { question: "Which is the smallest unit of measurement?", options: ["Kilometer", "Meter", "Centimeter", "Millimeter"], answer: "Millimeter" }
+        ];
+
+        function loadQuiz() {
+            const quizTable = document.getElementById("quiz");
+            quizTable.innerHTML = "<tr><th>Question</th><th>Option 1</th><th>Option 2</th><th>Option 3</th><th>Option 4</th></tr>";
+            
+            questions.forEach((q, index) => {
+                let row = document.createElement("tr");
+                let questionCell = document.createElement("td");
+                questionCell.textContent = q.question;
+                row.appendChild(questionCell);
+                
+                q.options.forEach(option => {
+                    let optionCell = document.createElement("td");
+                    let btn = document.createElement("button");
+                    btn.textContent = option;
+                    btn.onclick = function () {
+                        if (q.answered) return;
+                        q.answered = true;
+                        
+                        if (option === q.answer) {
+                            btn.classList.add("correct");
+                            correctAnswers++;
+                        } else {
+                            btn.classList.add("wrong");
+                            wrongAnswers++;
+                            
+                            row.querySelectorAll("button").forEach(b => {
+                                if (b.textContent === q.answer) {
+                                    b.classList.add("correct");
+                                }
+                            });
+                        }
+                        
+                        if (correctAnswers + wrongAnswers === totalQuestions) {
+                            showScore();
+                        }
+                    };
+                    optionCell.appendChild(btn);
+                    row.appendChild(optionCell);
+                });
+                quizTable.appendChild(row);
+            });
+        }
+
+        function showScore() {
+            let percentage = ((correctAnswers / totalQuestions) * 100).toFixed(2);
+            document.getElementById("score-container").innerHTML = 
+                `<p>Correct Answers: ${correctAnswers}</p>
+                 <p>Wrong Answers: ${wrongAnswers}</p>
+                 <p>Score Percentage: ${percentage}%</p>`;
+        }
+
+        window.onload = loadQuiz;
+    </script>
+</body>
+</html>

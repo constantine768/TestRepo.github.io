@@ -1,0 +1,453 @@
+[
+  {
+    "question": "In the sentence 'She has a lot of pride,' which word is an abstract noun?",
+    "options": ["She", "Pride", "Lot", "Has"],
+    "correctIndex": 1
+  },
+  {
+    "question": "In the sentence 'Megan is saving her money for her education,' which word is an abstract noun?",
+    "options": ["Money", "Education", "Saving", "Megan"],
+    "correctIndex": 1
+  },
+  {
+    "question": "In the sentence 'You need to have more confidence,' which word is an abstract noun?",
+    "options": ["More", "Confidence", "Need", "Have"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which of the following is an example of an abstract noun?",
+    "options": ["Table", "Happiness", "Dog", "Apple"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Correct the capitalization in the sentence: 'yesterday, my mom and i went to the theatre.'",
+    "options": [
+      "Yesterday, My Mom and I went to the theatre.",
+      "Yesterday, my Mom and I went to the Theatre.",
+      "Yesterday, my mom and I went to the theatre.",
+      "Yesterday, my mom and i went to the theatre."
+    ],
+    "correctIndex": 2
+  },
+  {
+    "question": "Which word should be capitalized in the sentence 'i did not know that so many people went to the movies on a saturday'?",
+    "options": ["i", "did", "movies", "saturday"],
+    "correctIndex": 0
+  },
+  {
+    "question": "Identify the correctly capitalized sentence:",
+    "options": [
+      "the place was full.",
+      "The place was full.",
+      "the Place was full.",
+      "The Place Was Full."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which of the following sentences is properly capitalized?",
+    "options": [
+      "after dinner, we went to eat at denny’s.",
+      "After dinner, we went to eat at Denny’s.",
+      "After Dinner, we went to eat at denny’s.",
+      "after Dinner, we went to eat at Denny’s."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "question": "What type of sentence is 'The building is on fire!'?",
+    "options": ["Declarative", "Imperative", "Interrogative", "Exclamatory"],
+    "correctIndex": 3
+  },
+  {
+    "question": "What type of sentence is 'My teacher drank three cups of coffee.'?",
+    "options": ["Declarative", "Imperative", "Interrogative", "Exclamatory"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What type of sentence is 'Have you ever met someone who doesn’t like pasta?'",
+    "options": ["Declarative", "Imperative", "Interrogative", "Exclamatory"],
+    "correctIndex": 2
+  },
+  {
+    "question": "What type of sentence is 'Hurry up!'?",
+    "options": ["Declarative", "Imperative", "Interrogative", "Exclamatory"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Combine the sentences using 'yet': 'Gina did not study for her test. She got an A.'",
+    "options": [
+      "Gina did not study for her test, yet she got an A.",
+      "Gina did not study for her test, so she got an A.",
+      "Gina did not study for her test, but she got an A.",
+      "Gina did not study for her test, and she got an A."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Combine the sentences using 'so': 'The satellite was down. They could not watch TV.'",
+    "options": [
+      "The satellite was down, and they could not watch TV.",
+      "The satellite was down, yet they could not watch TV.",
+      "The satellite was down, so they could not watch TV.",
+      "The satellite was down, for they could not watch TV."
+    ],
+    "correctIndex": 2
+  },
+  {
+    "question": "Combine the sentences using 'for': 'They went grocery shopping. There was nothing left to eat.'",
+    "options": [
+      "They went grocery shopping, for there was nothing left to eat.",
+      "They went grocery shopping, so there was nothing left to eat.",
+      "They went grocery shopping, but there was nothing left to eat.",
+      "They went grocery shopping, and there was nothing left to eat."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Combine the sentences using 'and': 'Dad started the barbecue. He cooked the steaks.'",
+    "options": [
+      "Dad started the barbecue, and he cooked the steaks.",
+      "Dad started the barbecue, yet he cooked the steaks.",
+      "Dad started the barbecue, so he cooked the steaks.",
+      "Dad started the barbecue, for he cooked the steaks."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "In the sentence 'The bus was full, so they walked home,' which word is the conjunction?",
+    "options": ["Bus", "Full", "So", "Home"],
+    "correctIndex": 2
+  },
+  {
+    "question": "Identify the conjunction in the sentence 'She enjoyed the cake, but she refused a second piece.'",
+    "options": ["Enjoyed", "But", "Refused", "Cake"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which conjunction correctly completes the sentence: 'Do you prefer apple ___ orange juice?'",
+    "options": ["And", "Or", "But", "So"],
+    "correctIndex": 1
+  },
+  {
+    "question": "In 'Time was up, yet I was not finished,' what role does 'yet' play?",
+    "options": ["It indicates cause.", "It shows contrast.", "It gives a reason.", "It lists items."],
+    "correctIndex": 1
+  },
+  {
+    "question": "In 'Would you like some milk with your cereal?', is 'milk' countable or uncountable?",
+    "options": ["Countable", "Uncountable", "Both", "Neither"],
+    "correctIndex": 1
+  },
+  {
+    "question": "In 'You will need eggs and sugar for this recipe,' is 'eggs' countable or uncountable?",
+    "options": ["Countable", "Uncountable", "Both", "Neither"],
+    "correctIndex": 0
+  },
+  {
+    "question": "In 'Devon asked for more time to finish his test,' is 'time' countable or uncountable?",
+    "options": ["Countable", "Uncountable", "Both", "Neither"],
+    "correctIndex": 1
+  },
+  {
+    "question": "In 'The teacher wanted his students to put more effort into their assignments,' is 'effort' countable or uncountable?",
+    "options": ["Countable", "Uncountable", "Both", "Neither"],
+    "correctIndex": 1
+  },
+  {
+    "question": "In 'Anthony plays the piano,' what is the direct object?",
+    "options": ["Anthony", "Plays", "The piano", "None"],
+    "correctIndex": 2
+  },
+  {
+    "question": "In 'My mom makes the best chocolate cake,' identify the direct object.",
+    "options": ["Mom", "Makes", "The best chocolate cake", "None"],
+    "correctIndex": 2
+  },
+  {
+    "question": "In 'The teacher reads a book,' what is the direct object?",
+    "options": ["Teacher", "Reads", "A book", "None"],
+    "correctIndex": 2
+  },
+  {
+    "question": "In 'Felix rides his bike every day,' what is the direct object?",
+    "options": ["Felix", "Rides", "His bike", "Every day"],
+    "correctIndex": 2
+  },
+  {
+    "question": "Correct the error in the sentence: 'He will ate dinner later.'",
+    "options": ["He will eat dinner later.", "He will eats dinner later.", "He will eating dinner later.", "He will eat dinner later!"],
+    "correctIndex": 0
+  },
+  {
+    "question": "Choose the corrected sentence for: 'The childs are lost in the shopping mall.'",
+    "options": ["The childs are lost in the shopping mall.", "The children are lost in the shopping mall.", "The child are lost in the shopping mall.", "The childrens are lost in the shopping mall."],
+    "correctIndex": 1
+  },
+  {
+    "question": "Select the correctly edited sentence for: 'Do you now what time it is'",
+    "options": ["Do you now what time it is?", "Do you know what time it is?", "Do you now what time is it?", "Do you know what time is it?"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which sentence is already correct?",
+    "options": ["I hope we go to Disney World this year!", "i hope we go to disney world this year!", "I hope we go to disney world this year!", "I hope we go to Disney world this Year!"],
+    "correctIndex": 0
+  },
+  {
+    "question": "In 'The tall trees blocked the sunlight,' which word is an adjective?",
+    "options": ["Trees", "Blocked", "Tall", "Sunlight"],
+    "correctIndex": 2
+  },
+  {
+    "question": "Identify the adjective in 'The cozy room was painted blue.'",
+    "options": ["Room", "Cozy", "Painted", "Blue"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which sentence uses adjectives correctly?",
+    "options": ["The small, blue car drove quickly.", "The car small blue drove quickly.", "The small car blue drove quickly.", "The blue small car drove quickly."],
+    "correctIndex": 0
+  },
+  {
+    "question": "In 'The hungry children ate the delicious cake,' which word is an adjective?",
+    "options": ["Ate", "Hungry", "Children", "Cake"],
+    "correctIndex": 1
+  },
+  {
+    "question": "In a story about building a tree house, which part of speech best fits the blank in 'Alfred decided to build a ______ tree house'?",
+    "options": ["Noun", "Adjective", "Verb", "Adverb"],
+    "correctIndex": 1
+  },
+  {
+    "question": "In the sentence 'He ______ through his yard to gather materials,' the blank should be filled with a:",
+    "options": ["Noun", "Verb", "Adjective", "Pronoun"],
+    "correctIndex": 1
+  },
+  {
+    "question": "In 'He picked up all the spare pieces of ______ that he could find,' the blank most appropriately requires a:",
+    "options": ["Verb", "Adjective", "Noun", "Adverb"],
+    "correctIndex": 2
+  },
+  {
+    "question": "In 'He looked in the drawers and finally found a ______ of nails,' which part of speech is missing?",
+    "options": ["Noun", "Verb", "Adjective", "Adverb"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What is the past tense of 'dig'?",
+    "options": ["Dug", "Digged", "Dugged", "Dig"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What is the past tense of 'keep'?",
+    "options": ["Kept", "Keeped", "Kipped", "Kepted"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What is the past tense of 'think'?",
+    "options": ["Thinked", "Thought", "Thunk", "Think"],
+    "correctIndex": 1
+  },
+  {
+    "question": "What is the past tense of 'ride'?",
+    "options": ["Rided", "Rode", "Ridden", "Ride"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which is correct? 'There are _______ cookies on the plate.'",
+    "options": ["much", "many", "more", "most"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Complete the sentence: 'I don't have _______ homework tonight.'",
+    "options": ["many", "more", "much", "most"],
+    "correctIndex": 2
+  },
+  {
+    "question": "Choose the correct word: 'She needs _______ time to finish her work.'",
+    "options": ["many", "more", "much", "most"],
+    "correctIndex": 2
+  },
+  {
+    "question": "Which option correctly fills the blank: 'There are _______ players on the team.'",
+    "options": ["many", "much", "more", "most"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What is the plural of 'child'?",
+    "options": ["Childs", "Children", "Childes", "Childer"],
+    "correctIndex": 1
+  },
+  {
+    "question": "What is the plural form of 'mouse'?",
+    "options": ["Mouses", "Mice", "Mousees", "Mices"],
+    "correctIndex": 1
+  },
+ {
+    "question": "Which sentence is in the simple future tense?",
+    "options": [
+      "I will go to the park tomorrow.",
+      "I went to the park yesterday.",
+      "I am going to the park now.",
+      "I have gone to the park."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Which auxiliary verb is used in the simple future tense?",
+    "options": ["Was", "Will", "Had", "Is"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Identify the simple future sentence:",
+    "options": [
+      "She will bake a cake.",
+      "She bakes a cake.",
+      "She was baking a cake.",
+      "She has baked a cake."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "What is the correct simple future tense form of the verb 'study'?",
+    "options": ["Will studied", "Will study", "Studied", "Studies"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which of these words is commonly used in simple future tense sentences?",
+    "options": ["Yesterday", "Tomorrow", "Before", "Since"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which sentence is in the simple past tense?",
+    "options": [
+      "He eats dinner.",
+      "He ate dinner.",
+      "He will eat dinner.",
+      "He is eating dinner."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "question": "What is the simple past form of 'go'?",
+    "options": ["Goes", "Went", "Going", "Gone"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Identify the simple past sentence:",
+    "options": [
+      "She danced at the party.",
+      "She is dancing at the party.",
+      "She will dance at the party.",
+      "She dances at the party."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Which of these verbs is irregular in the past tense?",
+    "options": ["Walk", "Jump", "Eat", "Talk"],
+    "correctIndex": 2
+  },
+  {
+    "question": "What is the past tense of 'write'?",
+    "options": ["Writes", "Written", "Wrote", "Writing"],
+    "correctIndex": 2
+  },
+  {
+    "question": "Which sentence is in the past continuous tense?",
+    "options": [
+      "He was running in the park.",
+      "He runs in the park.",
+      "He will run in the park.",
+      "He ran in the park."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "What auxiliary verb is used in past continuous tense?",
+    "options": ["Is", "Was/Were", "Will", "Have"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Identify the past continuous sentence:",
+    "options": [
+      "They were watching a movie.",
+      "They will watch a movie.",
+      "They watched a movie.",
+      "They watch a movie."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "What is the correct past continuous form of 'read'?",
+    "options": ["Readed", "Reading", "Was reading", "Reads"],
+    "correctIndex": 2
+  },
+  {
+    "question": "What does the past continuous tense indicate?",
+    "options": [
+      "A completed action",
+      "A habitual action",
+      "An ongoing action in the past",
+      "A future action"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "question": "Which of the following is a preposition?",
+    "options": ["Quickly", "And", "Under", "Write"],
+    "correctIndex": 2
+  },
+  {
+    "question": "Identify the sentence with a preposition:",
+    "options": [
+      "She is sitting under the tree.",
+      "She sings beautifully.",
+      "He will go tomorrow.",
+      "She and her friend are happy."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "What do prepositions show?",
+    "options": ["Action", "Position or relationship", "Emotion", "Time"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which of these is NOT a preposition?",
+    "options": ["Behind", "Jump", "On", "Over"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which sentence uses a preposition correctly?",
+    "options": [
+      "He walked across the street.",
+      "He will across walk the street.",
+      "He walk street across.",
+      "Across he walked street."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "What is the root word of 'happily'?",
+    "options": ["Happy", "Happily", "Happier", "Happiness"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What is the plural of 'child'?",
+    "options": ["Childs", "Children", "Childes", "Child's"],
+    "correctIndex": 1
+  },
+  {
+    "question": "What is the correct plural form of 'goose'?",
+    "options": ["Gooses", "Geese", "Goose's", "Geeses"],
+    "correctIndex": 1
+  },
+  {
+    "question": "What is the plural form of 'cactus'?",
+    "options": ["Cactus", "Cactuses", "Cacti", "Cactis"],
+    "correctIndex": 2
+  }
+
+]

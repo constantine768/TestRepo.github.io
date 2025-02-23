@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Tables Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        button {
+            font-size: 16px;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            min-width: 100px;
+        }
+        button.correct {
+            background-color: green;
+        }
+        button.wrong {
+            background-color: red;
+        }
+        .indicator {
+            font-size: 20px;
+            margin-left: 10px;
+            color: red;
+        }
+        #score-container {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Multiplication Tables Quiz</h2>
+        <table id="quiz"></table>
+        <div id="score-container"></div>
+    </div>
+
+    <script>
+        let correctAnswers = 0;
+        let wrongAnswers = 0;
+        let totalQuestions = 40;
+
+        function generateQuestions() {
+            let questions = [];
+            for (let i = 0; i < totalQuestions; i++) {
+                let num1 = Math.floor(Math.random() * 16) + 5;
+                let num2 = Math.floor(Math.random() * 10) + 1;
+                let correctAnswer = num1 * num2;
+                let options = new Set([correctAnswer]);
+                while (options.size < 4) {
+                    options.add(Math.floor(Math.random() * 200) + 1);
+                }
+                let optionsArray = Array.from(options).sort(() => Math.random() - 0.5);
+                questions.push({ num1, num2, correctAnswer, options: optionsArray, answered: false });
+            }
+            return questions;
+        }
+
+        function loadQuiz() {
+            const quizTable = document.getElementById("quiz");
+            let questions = generateQuestions();
+            quizTable.innerHTML = "<tr><th>Question</th><th>Option 1</th><th>Option 2</th><th>Option 3</th><th>Option 4</th></tr>";
+            
+            questions.forEach((q, index) => {
+                let row = document.createElement("tr");
+                let questionCell = document.createElement("td");
+                questionCell.textContent = `${q.num1} × ${q.num2} = ?`;
+                row.appendChild(questionCell);
+                
+                q.options.forEach(option => {
+                    let optionCell = document.createElement("td");
+                    let btn = document.createElement("button");
+                    btn.textContent = option;
+                    btn.onclick = function () {
+                        if (q.answered) return;
+                        q.answered = true;
+                        
+                        if (option === q.correctAnswer) {
+                            btn.classList.add("correct");
+                            correctAnswers++;
+                        } else {
+                            btn.classList.add("wrong");
+                            wrongAnswers++;
+                            
+                            row.querySelectorAll("button").forEach(b => {
+                                if (parseInt(b.textContent) === q.correctAnswer) {
+                                    b.classList.add("correct");
+                                }
+                            });
+                        }
+                        
+                        if (correctAnswers + wrongAnswers === totalQuestions) {
+                            showScore();
+                        }
+                    };
+                    optionCell.appendChild(btn);
+                    row.appendChild(optionCell);
+                });
+                quizTable.appendChild(row);
+            });
+        }
+
+        function showScore() {
+            let percentage = ((correctAnswers / totalQuestions) * 100).toFixed(2);
+            document.getElementById("score-container").innerHTML = 
+                `<p>Correct Answers: ${correctAnswers}</p>
+                 <p>Wrong Answers: ${wrongAnswers}</p>
+                 <p>Score Percentage: ${percentage}%</p>`;
+        }
+
+        window.onload = loadQuiz;
+    </script>
+</body>
+</html>

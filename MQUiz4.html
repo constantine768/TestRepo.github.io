@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 3 Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        button {
+            font-size: 16px;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            min-width: 100px;
+        }
+        button.correct {
+            background-color: green;
+        }
+        button.wrong {
+            background-color: red;
+        }
+        .svg-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        #score-container {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Grade 3 Quiz</h2>
+        <table id="quiz"></table>
+        <div id="score-container"></div>
+    </div>
+
+    <script>
+        let correctAnswers = 0;
+        let wrongAnswers = 0;
+        let totalQuestions = 50;
+        
+        const questions = [
+            { question: "What is 800 + 60 + 4?", options: ["804", "860", "864", "846"], answer: "864" },
+            { question: "What is 9,000 + 700 + 30 + 2?", options: ["9,703", "9,732", "9,372", "9,320"], answer: "9,732" },
+            { question: "What is 6,000 + 300 + 50 + 9?", options: ["6,359", "6,539", "6,935", "6,593"], answer: "6,359" },
+            { question: "What is the value of the digit 7 in 7,823?", options: ["7", "70", "700", "7,000"], answer: "7,000" },
+            { question: "In the number 4,562, what is the place value of the digit 5?", options: ["Tens", "Hundreds", "Thousands", "Ones"], answer: "Hundreds" },
+            { question: "What is 458 + 535?", options: ["883", "993", "985", "1,003"], answer: "993" },
+            { question: "What is 847 - 565?", options: ["282", "312", "398", "412"], answer: "282" },
+            { question: "What is 1,245 + 678?", options: ["1,923", "1,803", "1,833", "1,913"], answer: "1,923" },
+            { question: "Subtract 356 from 1,000.", options: ["644", "654", "744", "846"], answer: "644" },
+            { question: "What is 312 + 289?", options: ["591", "601", "611", "621"], answer: "601" },
+            { question: "Solve: 21 ÷ 3", options: ["5", "6", "7", "8"], answer: "7" },
+            { question: "Multiply 9 × 6.", options: ["42", "48", "54", "63"], answer: "54" },
+            { question: "How many hours are there in 3 days?", options: ["36", "48", "60", "72"], answer: "72" },
+            { question: "Convert 120 minutes into hours.", options: ["1", "2", "3", "4"], answer: "2" },
+            { question: "What type of triangle has all sides equal?", options: ["Scalene", "Isosceles", "Right", "Equilateral"], answer: "Equilateral" },
+            { question: "Find the missing number: 5, 10, __, 20, 25.", options: ["12", "15", "18", "20"], answer: "15" },
+            { question: "What tool is best used to measure the length of a pencil?", options: ["Ruler", "Thermometer", "Scale", "Clock"], answer: "Ruler" },
+            { question: "How many meters are in 1 kilometer?", options: ["100", "500", "1,000", "1,500"], answer: "1,000" },
+            { question: "What fraction of a pizza is left if you eat 2 out of 4 slices?", options: ["1/2", "1/3", "3/4", "1/4"], answer: "1/2" },
+            { question: "What fraction represents the shaded part if 3 out of 8 parts are shaded?", options: ["3/8", "1/3", "5/8", "3/5"], answer: "3/8" }
+        ];
+
+        function loadQuiz() {
+            const quizTable = document.getElementById("quiz");
+            quizTable.innerHTML = "<tr><th>Question</th><th>Options</th></tr>";
+            
+            questions.forEach(q => {
+                let row = document.createElement("tr");
+                let questionCell = document.createElement("td");
+                questionCell.innerHTML = `<p>${q.question}</p>`;
+                row.appendChild(questionCell);
+                
+                let optionsCell = document.createElement("td");
+                q.options.forEach(option => {
+                    let btn = document.createElement("button");
+                    btn.textContent = option;
+                    btn.onclick = function () {
+                        if (option === q.answer) {
+                            btn.classList.add("correct");
+                            correctAnswers++;
+                        } else {
+                            btn.classList.add("wrong");
+                            wrongAnswers++;
+                        }
+                        if (correctAnswers + wrongAnswers === totalQuestions) {
+                            showScore();
+                        }
+                    };
+                    optionsCell.appendChild(btn);
+                });
+                row.appendChild(optionsCell);
+                quizTable.appendChild(row);
+            });
+        }
+
+        function showScore() {
+            let percentage = ((correctAnswers / totalQuestions) * 100).toFixed(2);
+            document.getElementById("score-container").innerHTML = 
+                `<p>Correct Answers: ${correctAnswers}</p>
+                 <p>Wrong Answers: ${wrongAnswers}</p>
+                 <p>Score Percentage: ${percentage}%</p>`;
+        }
+
+        window.onload = loadQuiz;
+    </script>
+</body>
+</html>

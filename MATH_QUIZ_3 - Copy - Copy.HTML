@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 3 Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+    }
+    .container {
+      width: 80%;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+    button {
+      font-size: 16px;
+      padding: 10px;
+      margin: 5px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+      min-width: 100px;
+    }
+    button.correct {
+      background-color: green;
+    }
+    button.wrong {
+      background-color: red;
+    }
+    .svg-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    #score-container {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Grade 3 Quiz</h2>
+    <table id="quiz"></table>
+    <div id="score-container"></div>
+  </div>
+  <script>
+    let correctAnswers = 0;
+    let wrongAnswers = 0;
+    let totalQuestions = 50;
+
+    // --- SVG Visual Generators ---
+    function generateTriangleSVG() {
+      return `<svg width="100" height="100">
+                <polygon points="50,10 90,90 10,90" stroke="black" fill="lightblue" />
+              </svg>`;
+    }
+
+    function generateSquareSVG(side = 60, fill = 'lightgreen') {
+      return `<svg width="100" height="100">
+                <rect x="20" y="20" width="${side}" height="${side}" stroke="black" fill="${fill}" />
+              </svg>`;
+    }
+
+    function generateFractionSVG() {
+      return `<svg width="100" height="100">
+                <circle cx="50" cy="50" r="40" stroke="black" fill="white" />
+                <path d="M50,10 A40,40 0 0,1 90,50 L50,50 Z" fill="blue" />
+              </svg>`;
+    }
+
+    function generatePatternSVG() {
+      return `<svg width="100" height="40">
+                <rect x="0" y="0" width="20" height="20" fill="blue"/>
+                <rect x="30" y="0" width="20" height="20" fill="red"/>
+                <rect x="60" y="0" width="20" height="20" fill="yellow"/>
+              </svg>`;
+    }
+
+    function generateBarGraphSVG() {
+      return `<svg width="120" height="100">
+                <rect x="10" y="50" width="20" height="50" fill="green"/>
+                <rect x="40" y="30" width="20" height="70" fill="blue"/>
+                <rect x="70" y="10" width="20" height="90" fill="red"/>
+              </svg>`;
+    }
+
+    function generatePieChartSVG() {
+      return `<svg width="100" height="100">
+                <circle cx="50" cy="50" r="40" fill="lightgray" />
+                <path d="M50,50 L50,10 A40,40 0 0,1 90,50 Z" fill="orange" />
+              </svg>`;
+    }
+
+    function generateTallyChartSVG() {
+      return `<svg width="120" height="50">
+                <text x="10" y="30" font-size="20" fill="black">||||  |||  ||</text>
+              </svg>`;
+    }
+
+    function generateRectangleSVG() {
+      return `<svg width="150" height="80">
+                <rect x="10" y="20" width="130" height="40" stroke="black" fill="none" />
+                <text x="75" y="50" text-anchor="middle" fill="black" font-size="14">10ft x 5ft</text>
+              </svg>`;
+    }
+
+    function generateHexagonSVG() {
+      return `<svg width="100" height="100">
+                <polygon points="50,10 80,30 80,70 50,90 20,70 20,30" stroke="black" fill="lightpink" />
+              </svg>`;
+    }
+
+    function generateRectangleForGeometrySVG() {
+      return `<svg width="150" height="80">
+                <rect x="10" y="20" width="130" height="40" stroke="black" fill="none" />
+                <text x="75" y="50" text-anchor="middle" fill="black" font-size="14">7m x 3m</text>
+              </svg>`;
+    }
+
+    function generateShapePatternSVG() {
+      return `<svg width="200" height="60">
+                <circle cx="30" cy="30" r="15" stroke="black" fill="lightblue" />
+                <rect x="60" y="15" width="30" height="30" stroke="black" fill="lightgreen" />
+                <polygon points="120,15 150,45 90,45" stroke="black" fill="pink" />
+                <circle cx="170" cy="30" r="15" stroke="black" fill="lightblue" />
+                <rect x="190" y="15" width="30" height="30" stroke="black" fill="lightgreen" />
+              </svg>`;
+    }
+
+    function generateRulerSVG() {
+      return `<svg width="150" height="30">
+                <rect x="0" y="10" width="150" height="10" fill="yellow" stroke="black"/>
+                <line x1="15" y1="10" x2="15" y2="20" stroke="black"/>
+                <line x1="30" y1="10" x2="30" y2="20" stroke="black"/>
+                <line x1="45" y1="10" x2="45" y2="20" stroke="black"/>
+                <line x1="60" y1="10" x2="60" y2="20" stroke="black"/>
+                <line x1="75" y1="10" x2="75" y2="20" stroke="black"/>
+                <line x1="90" y1="10" x2="90" y2="20" stroke="black"/>
+                <line x1="105" y1="10" x2="105" y2="20" stroke="black"/>
+                <line x1="120" y1="10" x2="120" y2="20" stroke="black"/>
+                <line x1="135" y1="10" x2="135" y2="20" stroke="black"/>
+              </svg>`;
+    }
+
+    function generateThermometerSVG() {
+      return `<svg width="50" height="150">
+                <rect x="20" y="10" width="10" height="80" fill="lightgray" stroke="black"/>
+                <circle cx="25" cy="100" r="15" fill="red" stroke="black"/>
+              </svg>`;
+    }
+
+    // --- 50-Question Bank ---
+    const questions = [
+      // 1. Place Value (Questions 1–5)
+      { question: "What is 800 + 60 + 4?", options: ["804", "860", "864", "846"], answer: "864" },
+      { question: "What is 9,000 + 700 + 30 + 2?", options: ["9,703", "9,732", "9,372", "9,320"], answer: "9,732" },
+      { question: "What is 6,000 + 300 + 50 + 9?", options: ["6,359", "6,539", "6,935", "6,593"], answer: "6,359" },
+      { question: "What is the value of the digit 7 in 7,823?", options: ["7", "70", "700", "7,000"], answer: "7,000" },
+      { question: "In the number 4,562, what is the place value of the digit 5?", options: ["Tens", "Hundreds", "Thousands", "Ones"], answer: "Hundreds" },
+      // 2. Addition & Subtraction (Questions 6–11)
+      { question: "What is 458 + 535?", options: ["883", "993", "985", "1,003"], answer: "993" },
+      { question: "What is 847 - 565?", options: ["282", "312", "398", "412"], answer: "282" },
+      { question: "What is 1,245 + 678?", options: ["1,923", "1,803", "1,833", "1,913"], answer: "1,923" },
+      { question: "Subtract 356 from 1,000.", options: ["644", "654", "744", "846"], answer: "644" },
+      { question: "What is 312 + 289?", options: ["591", "601", "611", "621"], answer: "601" },
+      { question: "What is 750 - 432?", options: ["308", "318", "328", "338"], answer: "318" },
+      // 3. Multiplication & Division (Questions 12–17)
+      { question: "What is 15 ÷ 3?", options: ["3", "5", "6", "4"], answer: "5" },
+      { question: "What number divided by 8 equals 7?", options: ["48", "54", "56", "64"], answer: "56" },
+      { question: "Multiply 9 × 6.", options: ["42", "48", "54", "63"], answer: "54" },
+      { question: "Divide 144 by 12.", options: ["10", "11", "12", "13"], answer: "12" },
+      { question: "What is 7 × 8?", options: ["54", "56", "64", "49"], answer: "56" },
+      { question: "What is 36 ÷ 6?", options: ["5", "6", "7", "8"], answer: "6" },
+      // 4. Time Conversions (Questions 18–23)
+      { question: "How many hours are there in 3 days?", options: ["36", "48", "60", "72"], answer: "72" },
+      { question: "Convert 120 minutes into hours.", options: ["1", "2", "3", "4"], answer: "2" },
+      { question: "What is 5 minutes in seconds?", options: ["200", "250", "300", "350"], answer: "300" },
+      { question: "Convert 2 days into hours.", options: ["24", "36", "48", "60"], answer: "48" },
+      { question: "How many minutes are in 3 hours?", options: ["120", "180", "240", "360"], answer: "180" },
+      { question: "How many seconds are in 1 hour?", options: ["3,600", "1,800", "4,200", "3,000"], answer: "3,600" },
+      // 5. Geometry (Questions 24–29) - With visuals
+      { question: "What is the perimeter of a rectangle with length 10 ft and width 5 ft?", image: generateRectangleSVG(), options: ["25 ft", "30 ft", "35 ft", "40 ft"], answer: "35 ft" },
+      { question: "What type of triangle has all sides equal?", image: generateTriangleSVG(), options: ["Scalene", "Isosceles", "Right", "Equilateral"], answer: "Equilateral" },
+      { question: "What is the area of a square with sides of 6 cm?", image: generateSquareSVG(60), options: ["12 cm²", "24 cm²", "30 cm²", "36 cm²"], answer: "36 cm²" },
+      { question: "How many sides does a hexagon have?", image: generateHexagonSVG(), options: ["4", "5", "6", "8"], answer: "6" },
+      { question: "What is the perimeter of a square with side length 8 cm?", image: generateSquareSVG(60, 'lightcoral'), options: ["24 cm", "28 cm", "32 cm", "36 cm"], answer: "32 cm" },
+      { question: "What is the area of a rectangle with length 7 m and width 3 m?", image: generateRectangleForGeometrySVG(), options: ["21 m²", "24 m²", "25 m²", "28 m²"], answer: "21 m²" },
+      // 6. Patterns (Questions 30–34) - With visuals where appropriate
+      { question: "What is the next number in the pattern: 2, 4, 6, 8, __?", image: generatePatternSVG(), options: ["10", "12", "14", "16"], answer: "10" },
+      { question: "Which shape comes next in the pattern: Circle, Square, Triangle, Circle, Square, __?", image: generateShapePatternSVG(), options: ["Triangle", "Circle", "Square", "Rectangle"], answer: "Triangle" },
+      { question: "Find the missing number: 5, 10, __, 20, 25.", options: ["12", "15", "18", "20"], answer: "15" },
+      { question: "What comes next in the letter pattern: A, C, E, G, __?", options: ["H", "I", "J", "K"], answer: "I" },
+      { question: "Identify the pattern: 3, 6, 12, 24, __?", options: ["30", "36", "42", "48"], answer: "48" },
+      // 7. Measurements (Questions 35–39)
+      { question: "How many centimeters are in 2 meters?", options: ["100", "200", "300", "400"], answer: "200" },
+      { question: "What tool is best used to measure the length of a pencil?", image: generateRulerSVG(), options: ["Ruler", "Thermometer", "Scale", "Clock"], answer: "Ruler" },
+      { question: "How many grams are in 1 kilogram?", options: ["100", "500", "1,000", "1,500"], answer: "1,000" },
+      { question: "Which instrument would you use to measure temperature?", image: generateThermometerSVG(), options: ["Ruler", "Thermometer", "Stopwatch", "Scale"], answer: "Thermometer" },
+      { question: "How many meters are in 1 kilometer?", options: ["100", "500", "1,000", "1,500"], answer: "1,000" },
+      // 8. Data Handling (Questions 40–44) - With visuals
+      { question: "If 4 students like apples, 6 like bananas, and 8 like oranges, which fruit is most popular?", image: generateBarGraphSVG(), options: ["Apples", "Bananas", "Oranges", "All the same"], answer: "Oranges" },
+      { question: "A bar graph shows 10 students prefer football, 5 prefer basketball, and 3 prefer tennis. Which sport is least popular?", image: generateBarGraphSVG(), options: ["Football", "Basketball", "Tennis", "All the same"], answer: "Tennis" },
+      { question: "In a survey, 7 students chose red, 5 chose blue, and 8 chose green. Which color was chosen most?", image: generateBarGraphSVG(), options: ["Red", "Blue", "Green", "They are equal"], answer: "Green" },
+      { question: "A pie chart shows 50% of students like math, 30% like science, and 20% like art. What fraction of students like science?", image: generatePieChartSVG(), options: ["1/2", "3/10", "1/3", "1/4"], answer: "3/10" },
+      { question: "If a tally chart shows 4 tallies for Monday, 7 for Tuesday, and 5 for Wednesday, which day had the highest count?", image: generateTallyChartSVG(), options: ["Monday", "Tuesday", "Wednesday", "They are equal"], answer: "Tuesday" },
+      // 9. Fractions (Questions 45–50) - With visuals
+      { question: "What fraction of a pizza is left if you eat 2 out of 4 slices?", image: generateFractionSVG(), options: ["1/2", "1/3", "3/4", "1/4"], answer: "1/2" },
+      { question: "Which fraction is equal to 0.5?", image: generateFractionSVG(), options: ["1/3", "1/2", "3/4", "2/5"], answer: "1/2" },
+      { question: "What is 1/4 of 20?", options: ["4", "5", "6", "7"], answer: "5" },
+      { question: "If you have 3/4 of a cup of juice and you drink 1/4, how much is left?", image: generateFractionSVG(), options: ["1/4", "2/4", "3/4", "0"], answer: "1/4" },
+      { question: "What fraction represents the shaded part if 3 out of 8 parts are shaded?", image: generateFractionSVG(), options: ["3/8", "1/3", "5/8", "3/5"], answer: "3/8" },
+      { question: "Which fraction is greater: 2/3 or 3/4?", options: ["2/3", "3/4", "They are equal", "Cannot be determined"], answer: "3/4" }
+    ];
+
+    function loadQuiz() {
+      const quizTable = document.getElementById("quiz");
+      quizTable.innerHTML = "<tr><th>Question</th><th>Options</th></tr>";
+      questions.forEach(q => {
+        let row = document.createElement("tr");
+        let questionCell = document.createElement("td");
+        questionCell.innerHTML = `<p>${q.question}</p>`;
+        if (q.image) {
+          questionCell.innerHTML += `<div class="svg-container">${q.image}</div>`;
+        }
+        row.appendChild(questionCell);
+        let optionsCell = document.createElement("td");
+        q.options.forEach(option => {
+          let btn = document.createElement("button");
+          btn.textContent = option;
+          btn.onclick = function () {
+            if (option === q.answer) {
+              btn.classList.add("correct");
+              correctAnswers++;
+            } else {
+              btn.classList.add("wrong");
+              wrongAnswers++;
+            }
+            if (correctAnswers + wrongAnswers === totalQuestions) {
+              showScore();
+            }
+          };
+          optionsCell.appendChild(btn);
+        });
+        row.appendChild(optionsCell);
+        quizTable.appendChild(row);
+      });
+    }
+
+    function showScore() {
+      let percentage = ((correctAnswers / totalQuestions) * 100).toFixed(2);
+      document.getElementById("score-container").innerHTML =
+        `<p>Correct Answers: ${correctAnswers}</p>
+         <p>Wrong Answers: ${wrongAnswers}</p>
+         <p>Score Percentage: ${percentage}%</p>`;
+    }
+
+    window.onload = loadQuiz;
+  </script>
+</body>
+</html>
