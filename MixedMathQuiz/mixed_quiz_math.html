@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grade 3 Multi-Page Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+    }
+    .container {
+      width: 80%;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .score-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      background: #007bff;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .quiz-container {
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+    button {
+      font-size: 16px;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+      min-width: 100px;
+      margin: 3px;
+    }
+    button.correct {
+      background-color: green;
+    }
+    button.wrong {
+      background-color: red;
+    }
+    .svg-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .nav-buttons {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="score-container">
+      Score: <span id="score">0</span> / <span id="attempted">0</span> (<span id="percentage">0</span>%)
+    </div>
+    <h2>Grade 3 Multi-Page Quiz</h2>
+    <div id="quiz-sections">
+      <div class="quiz-container active" id="patterns"></div>
+      <div class="quiz-container" id="fractions"></div>
+      <div class="quiz-container" id="measurement"></div>
+      <div class="quiz-container" id="data-handling"></div>
+      <div class="quiz-container" id="division"></div>
+      <div class="quiz-container" id="arithmetic"></div>
+    </div>
+    <div class="nav-buttons">
+      <button onclick="changePage(-1)">Previous</button>
+      <button onclick="changePage(1)">Next</button>
+    </div>
+  </div>
+
+  <script>
+    let correctAnswers = 0;
+    let wrongAnswers = 0;
+    let currentPage = 0;
+    const quizSections = ["patterns", "fractions", "measurement", "data-handling", "division", "arithmetic"];
+    let totalQuestions = 0; // Will be calculated after loading data
+
+    // --- Load quiz content from external JSON ---
+    function loadQuizzes(quizData) {
+      totalQuestions = 0;
+      quizSections.forEach(section => {
+        totalQuestions += quizData[section].length;
+      });
+      quizSections.forEach(section => {
+        loadSection(section, quizData[section]);
+      });
+    }
+    
+    function loadSection(sectionId, questions) {
+      let container = document.getElementById(sectionId);
+      let table = document.createElement("table");
+      table.innerHTML = "<tr><th>Question</th><th>Options</th></tr>";
+      questions.forEach(q => {
+        let row = document.createElement("tr");
+        let questionCell = document.createElement("td");
+        questionCell.innerHTML = "<p>" + q.question + "</p>";
+        row.appendChild(questionCell);
+    
+        let optionsCell = document.createElement("td");
+        let answered = false;  // Flag to track if the question is answered
+        q.options.forEach(option => {
+          let btn = document.createElement("button");
+          btn.textContent = option;
+          btn.onclick = function() {
+            if (answered) return; // Prevent multiple attempts
+            answered = true;
+
+            if (option === q.answer) {
+              btn.classList.add("correct");
+              correctAnswers++;
+            } else {
+              btn.classList.add("wrong");
+              wrongAnswers++;
+              // Highlight the correct option in green
+              row.querySelectorAll("button").forEach(b => {
+                if (b.textContent === q.answer) {
+                  b.classList.add("correct");
+                }
+              });
+            }
+            // Disable all option buttons for this question row
+            row.querySelectorAll("button").forEach(b => b.disabled = true);
+            updateScore();
+          };
+          optionsCell.appendChild(btn);
+        });
+        row.appendChild(optionsCell);
+        table.appendChild(row);
+      });
+      container.appendChild(table);
+    }
+    
+    function changePage(direction) {
+      document.getElementById(quizSections[currentPage]).classList.remove("active");
+      currentPage += direction;
+      if (currentPage < 0) currentPage = 0;
+      if (currentPage >= quizSections.length) currentPage = quizSections.length - 1;
+      document.getElementById(quizSections[currentPage]).classList.add("active");
+    }
+    
+    function updateScore() {
+      let attempted = correctAnswers + wrongAnswers;
+      document.getElementById("score").textContent = correctAnswers + " / " + attempted;
+      document.getElementById("attempted").textContent = attempted;
+      let percentage = attempted > 0 ? ((correctAnswers / attempted) * 100).toFixed(2) : 0;
+      document.getElementById("percentage").textContent = percentage;
+    }
+    
+    window.onload = function() {
+      fetch("questions.json")
+        .then(response => response.json())
+        .then(data => loadQuizzes(data))
+        .catch(error => console.error("Error loading quiz data:", error));
+    };
+  </script>
+</body>
+</html>
