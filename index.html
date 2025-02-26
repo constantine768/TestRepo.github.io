@@ -3,130 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multiplication Tables Quiz</title>
+    <title>Repository Directory Listing</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
-        .container {
-            width: 50%;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .question {
-            margin: 15px 0;
-            font-size: 18px;
-        }
-        .options {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .option-container {
-            display: flex;
-            align-items: center;
-        }
-        .options button {
-            font-size: 16px;
-            padding: 10px;
-            margin: 5px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: white;
-            min-width: 100px;
-        }
-        .options button.correct {
-            background-color: green;
-        }
-        .options button.wrong {
-            background-color: red;
-        }
-        .options button:hover {
-            background: #0056b3;
-        }
-        .indicator {
-            font-size: 20px;
-            margin-left: 10px;
-            color: red;
-        }
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin: 5px 0; }
+        a { text-decoration: none; color: #007bff; }
+        a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Multiplication Tables Quiz</h2>
-        <div id="quiz"></div>
-    </div>
+
+    <h2>Repository Directory Listing</h2>
+    <ul id="file-list">Loading...</ul>
 
     <script>
-        function generateQuestions() {
-            let questions = [];
-            for (let i = 0; i < 50; i++) {
-                let num1 = Math.floor(Math.random() * 16) + 5; // Tables from 5 to 20
-                let num2 = Math.floor(Math.random() * 10) + 1;
-                let correctAnswer = num1 * num2;
-                let options = new Set([correctAnswer]);
-                while (options.size < 4) {
-                    options.add(Math.floor(Math.random() * 200) + 1);
-                }
-                let optionsArray = Array.from(options).sort(() => Math.random() - 0.5);
-                questions.push({ num1, num2, correctAnswer, options: optionsArray });
-            }
-            return questions;
-        }
+        const repoOwner = "OWNER";  // Replace with your GitHub username
+        const repoName = "REPO";    // Replace with your repository name
+        const branch = "main";      // Change this if your default branch is different
 
-        function loadQuiz() {
-            const quizContainer = document.getElementById("quiz");
-            let questions = generateQuestions();
-            quizContainer.innerHTML = "";
-            
-            questions.forEach((q, index) => {
-                let questionDiv = document.createElement("div");
-                questionDiv.classList.add("question");
-                questionDiv.innerHTML = `<p>${index + 1}. What is ${q.num1} × ${q.num2}?</p>`;
-                let optionsDiv = document.createElement("div");
-                optionsDiv.classList.add("options");
-                
-                q.options.forEach(option => {
-                    let optionContainer = document.createElement("div");
-                    optionContainer.classList.add("option-container");
-                    let btn = document.createElement("button");
-                    btn.textContent = option;
-                    let indicator = document.createElement("span");
-                    indicator.classList.add("indicator");
-                    optionContainer.appendChild(btn);
-                    optionContainer.appendChild(indicator);
-                    
-                    btn.onclick = function () {
-                        if (option === q.correctAnswer) {
-                            btn.classList.add("correct");
-                        } else {
-                            btn.classList.add("wrong");
-                            indicator.textContent = "✗";
-                            
-                            // Highlight correct answer
-                            optionsDiv.querySelectorAll("button").forEach(b => {
-                                if (parseInt(b.textContent) === q.correctAnswer) {
-                                    b.classList.add("correct");
-                                }
-                            });
-                        }
-                    };
-                    
-                    optionsDiv.appendChild(optionContainer);
+        async function fetchRepoContents(path = "") {
+            const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("Failed to fetch directory listing");
+                const data = await response.json();
+
+                const fileList = document.getElementById("file-list");
+                fileList.innerHTML = ""; // Clear loading text
+
+                data.forEach(file => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `<a href="${file.html_url}" target="_blank">${file.name}</a>`;
+                    fileList.appendChild(li);
                 });
-                quizContainer.appendChild(questionDiv);
-                quizContainer.appendChild(optionsDiv);
-            });
+            } catch (error) {
+                document.getElementById("file-list").innerHTML = "Error loading directory.";
+                console.error(error);
+            }
         }
 
-        window.onload = loadQuiz;
+        fetchRepoContents();
     </script>
+
 </body>
 </html>
