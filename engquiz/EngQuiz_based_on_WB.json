@@ -1,0 +1,216 @@
+[
+  {
+    "question": "Read the passage and identify the correct setting: 'I dug a small hole in the sand. Then, my little sister called me to join her on the swing.'",
+    "options": ["Beach", "Park", "School"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Fill in the blank with the correct past tense verb: 'Poonam ___ all her homework and ___ to sleep.'",
+    "options": ["do, goes", "did, went", "does, gone"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Choose the correct preposition: 'The cat is ___ the table.'",
+    "options": ["on", "under", "above"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which of the following is an abstract noun?",
+    "options": ["Table", "Happiness", "Dog", "Apple"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Choose the correctly capitalized sentence.",
+    "options": [
+      "yesterday, my mom and i went to the theatre.",
+      "Yesterday, my Mom and I went to the Theatre.",
+      "Yesterday, my mom and I went to the theatre."
+    ],
+    "correctIndex": 2
+  },
+  {
+    "question": "What happens after the sun sets, according to the passage?",
+    "options": ["The moon disappears", "Stars appear in the sky", "It remains bright"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Select the correct form of the verb: 'Jimmy and Tio ___ the jungle gym.'",
+    "options": ["climb", "climbed", "climbing"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Identify the root word in 'peaceful'.",
+    "options": ["Peace", "Full", "Peaceful"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What was special about Jasmine’s raincoat?",
+    "options": ["It changed colors", "It displayed scenes when wet", "It was waterproof"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Fill in the blank with 'will' or 'shall': 'The bus ___ pick you up from the same spot tomorrow.'",
+    "options": ["will", "shall"],
+    "correctIndex": 0
+  },
+  {
+    "question": "Which of the following is a synonym for 'happy'?",
+    "options": ["Sad", "Joyful", "Angry"],
+    "correctIndex": 1
+  },
+  {
+    "question": "What is the plural of 'mouse'?",
+    "options": ["Mouses", "Mouse", "Mice"],
+    "correctIndex": 2
+  },
+  {
+    "question": "Which of these sentences is punctuated correctly?",
+    "options": [
+      "Mom asked: 'Where are you going?'",
+      "Mom asked, 'Where are you going?'",
+      "Mom asked, Where are you going?"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which word in the sentence 'She quickly finished her homework' is an adverb?",
+    "options": ["She", "Quickly", "Homework"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which word describes a noun?",
+    "options": ["Adverb", "Verb", "Adjective"],
+    "correctIndex": 2
+  },
+  {
+    "question": "What is the opposite of 'brave'?",
+    "options": ["Fearful", "Strong", "Happy"],
+    "correctIndex": 0
+  },
+  {
+    "question": "Which is a type of punctuation?",
+    "options": ["Verb", "Comma", "Noun"],
+    "correctIndex": 1
+  },
+  {
+    "question": "What does the word 'gigantic' mean?",
+    "options": ["Tiny", "Huge", "Slow"],
+    "correctIndex": 1
+  },
+  {
+    "question": "What do you call words that have opposite meanings?",
+    "options": ["Synonyms", "Antonyms", "Homonyms"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which of these words has the correct spelling?",
+    "options": ["Beutiful", "Beautiful", "Beautful"],
+    "correctIndex": 1
+  },
+  {
+    "question": "What is the correct past tense of 'run'?",
+    "options": ["Ran", "Running", "Runned"],
+    "correctIndex": 0
+  },
+  {
+    "question": "Which of the following words is a noun?",
+    "options": ["Jump", "Table", "Run"],
+    "correctIndex": 1
+  },
+  {
+    "question": "What is the superlative form of 'fast'?",
+    "options": ["Faster", "Fastest", "Most Fast"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which sentence correctly uses 'there'?",
+    "options": [
+      "They're playing outside.",
+      "The ball is over there.",
+      "Their dog is friendly."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which punctuation mark is used to end a question?",
+    "options": ["Period", "Exclamation mark", "Question mark"],
+    "correctIndex": 2
+  },
+  {
+    "question": "Which sentence is in the present continuous tense?",
+    "options": [
+      "She is reading a book.",
+      "She read a book yesterday.",
+      "She will read a book tomorrow."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Which of these is a homophone?",
+    "options": ["Sun and son", "Run and ran", "Book and books"],
+    "correctIndex": 0
+  },
+  {
+    "question": "Which of the following words is a verb?",
+    "options": ["Sing", "Beautiful", "Happy"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What is the subject in the sentence 'The cat sleeps on the mat'?",
+    "options": ["Cat", "Sleeps", "Mat"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What type of sentence is 'Wow! That was amazing'?",
+    "options": ["Exclamatory", "Interrogative", "Declarative"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What do we call a word that describes an action?",
+    "options": ["Adverb", "Noun", "Verb"],
+    "correctIndex": 2
+  },
+  {
+    "question": "Which of the following is a conjunction?",
+    "options": ["Run", "And", "Blue"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which word is a pronoun?",
+    "options": ["Car", "He", "Jump"],
+    "correctIndex": 1
+  },
+  {
+    "question": "What does a question mark do?",
+    "options": ["Ends a statement", "Shows excitement", "Ends a question"],
+    "correctIndex": 2
+  },
+  {
+    "question": "Which sentence uses the correct form of 'you're'?",
+    "options": [
+      "You're going to love this movie!",
+      "Your going to love this movie!",
+      "Yore going to love this movie!"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Which is a compound word?",
+    "options": ["Basketball", "Run", "Green"],
+    "correctIndex": 0
+  },
+  {
+    "question": "Which word means the same as 'difficult'?",
+    "options": ["Easy", "Hard", "Small"],
+    "correctIndex": 1
+  },
+  {
+    "question": "Which sentence is grammatically correct?",
+    "options": [
+      "She don't like ice cream.",
+      "She doesn't like ice cream.",
+      "She didn't liked ice cream."
+    ],
+    "correctIndex": 1
+  }
+]
