@@ -48,8 +48,11 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .option input {
-            margin-right: 8px;
+        .option.correct {
+            background: lightgreen;
+        }
+        .option.incorrect {
+            background: lightcoral;
         }
         .nav-buttons {
             display: flex;
@@ -90,25 +93,19 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="header">
             <span>English Quiz</span>
             <span class="score">Score: <span id="score">0</span></span>
         </div>
 
-        <!-- Question Section -->
         <div class="question-container" id="question-container"></div>
-
-        <!-- Options Section -->
         <div class="options" id="options-container"></div>
 
-        <!-- Navigation Buttons -->
         <div class="nav-buttons">
             <button class="nav-button" id="prev-btn">Prev</button>
             <button class="nav-button" id="next-btn">Next</button>
         </div>
 
-        <!-- Number Navigation -->
         <div class="bottom-nav" id="num-nav"></div>
     </div>
 
@@ -117,11 +114,13 @@
             let currentQuestionIndex = 0;
             let questions = [];
             let score = 0;
+            let answeredQuestions = {};
 
             async function loadQuestions() {
                 try {
                     const response = await fetch("EngQuiz_based_on_WB_varied_questionTypes.json");
                     questions = await response.json();
+                    questions = shuffleArray(questions);
                     displayQuestion();
                     createNavButtons();
                 } catch (error) {
@@ -140,69 +139,47 @@
 
                 questionContainer.innerHTML = `<p>${currentQuestionIndex + 1}. ${questionObj.question}</p>`;
 
-                switch (questionObj.question_type) {
-                    case "Fill in the Blanks":
-                        optionsContainer.innerHTML = `<input type="text" id="user-answer" class="option">`;
-                        break;
+                questionObj.options.forEach((option, index) => {
+                    const optionElement = document.createElement("div");
+                    optionElement.classList.add("option");
+                    optionElement.textContent = option;
+                    optionElement.addEventListener("click", () => checkAnswer(optionElement, index, questionObj.correctAnswer));
+                    optionsContainer.appendChild(optionElement);
+                });
 
-                    case "Match the Following":
-                        questionObj.options.forEach((pair, index) => {
-                            optionsContainer.innerHTML += `
-                                <div class="option">
-                                    ${pair[0]} - 
-                                    <select id="match-${index}">
-                                        ${questionObj.matchOptions.map(opt => `<option value="${opt}">${opt}</option>`).join("")}
-                                    </select>
-                                </div>
-                            `;
-                        });
-                        break;
+                updateScore();
+            }
 
-                    case "Sentence Correction":
-                    case "Dialogue Correction":
-                        questionObj.options.forEach((option, index) => {
-                            optionsContainer.innerHTML += `
-                                <label class="option">
-                                    <input type="radio" name="answer" value="${index}"> ${option}
-                                </label>
-                            `;
-                        });
-                        break;
+            function checkAnswer(selectedOption, index, correctIndex) {
+                if (answeredQuestions[currentQuestionIndex] !== undefined) return;
 
-                    case "Identify the Word Type":
-                    case "Root Word Identification":
-                    case "Synonyms and Antonyms":
-                    case "Preposition Usage":
-                        optionsContainer.innerHTML = `
-                            <select id="user-answer">
-                                ${questionObj.options.map(opt => `<option value="${opt}">${opt}</option>`).join("")}
-                            </select>
-                        `;
-                        break;
+                answeredQuestions[currentQuestionIndex] = index;
+                const options = document.querySelectorAll(".option");
 
-                    case "Sentence Sequencing":
-                        optionsContainer.innerHTML = `
-                            <textarea id="user-answer" rows="3" class="option"></textarea>
-                        `;
-                        break;
+                options.forEach((opt, idx) => {
+                    if (idx === correctIndex) opt.classList.add("correct");
+                    if (idx === index && idx !== correctIndex) opt.classList.add("incorrect");
+                });
 
-                    case "Verb Forms & Tense Identification":
-                        questionObj.options.forEach((option, index) => {
-                            optionsContainer.innerHTML += `
-                                <label class="option">
-                                    <input type="radio" name="answer" value="${index}"> ${option}
-                                </label>
-                            `;
-                        });
-                        break;
+                if (index === correctIndex) {
+                    score++;
                 }
+
+                updateScore();
+            }
+
+            function updateScore() {
+                document.getElementById("score").textContent = score;
             }
 
             function createNavButtons() {
                 const numNav = document.getElementById("num-nav");
                 numNav.innerHTML = "";
                 for (let i = 0; i < questions.length; i++) {
-                    numNav.innerHTML += `<button onclick="jumpToQuestion(${i})">${i + 1}</button>`;
+                    const btn = document.createElement("button");
+                    btn.textContent = i + 1;
+                    btn.addEventListener("click", () => jumpToQuestion(i));
+                    numNav.appendChild(btn);
                 }
             }
 
@@ -224,6 +201,10 @@
                     displayQuestion();
                 }
             });
+
+            function shuffleArray(array) {
+                return array.sort(() => Math.random() - 0.5);
+            }
 
             loadQuestions();
         });

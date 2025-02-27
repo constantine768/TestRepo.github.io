@@ -18,9 +18,10 @@
     <ul id="file-list">Loading...</ul>
 
     <script>
-        const repoOwner = "constantine768";  // Replace with your GitHub username
-        const repoName = "TestRepo.github.io";    // Replace with your repository name
-        const branch = "main";      // Change this if your default branch is different
+        const repoOwner = "constantine768";  // Your GitHub username
+        const repoName = "TestRepo.github.io"; // Your repository name
+        const branch = "main"; // Change if using a different branch
+        const homeUrl = "https://constantine768.github.io/TestRepo.github.io/"; // Base URL for file links
 
         async function fetchRepoContents(path = "") {
             const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`;
@@ -34,7 +35,11 @@
 
                 data.forEach(file => {
                     const li = document.createElement("li");
-                    li.innerHTML = `<a href="${file.html_url}" target="_blank">${file.name}</a>`;
+
+                    // Construct correct URL for GitHub Pages
+                    const fileUrl = homeUrl + file.path;
+
+                    li.innerHTML = `<a href="${fileUrl}" target="_blank">${file.name}</a>`;
                     fileList.appendChild(li);
                 });
             } catch (error) {
