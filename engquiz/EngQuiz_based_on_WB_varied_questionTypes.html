@@ -16,9 +16,10 @@
             max-width: 600px;
             background: white;
             margin: 20px auto;
-            padding: 15px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            position: relative;
         }
         .header {
             background: #2d662d;
@@ -32,41 +33,57 @@
         }
         .score {
             color: red;
+            font-weight: bold;
         }
         .question-container {
             font-size: 18px;
-            margin: 10px 0;
+            margin: 20px 0;
+            font-weight: bold;
         }
         .options {
-            margin: 10px 0;
+            margin: 15px 0;
         }
         .option {
             display: block;
-            padding: 10px;
+            padding: 12px;
             background: #f8f8f8;
             margin: 5px 0;
             border-radius: 5px;
             cursor: pointer;
+            border: 1px solid #ccc;
         }
         .option.correct {
             background: lightgreen;
+            border-color: green;
         }
         .option.incorrect {
             background: lightcoral;
+            border-color: red;
         }
         .nav-buttons {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 600px;
+            background: white;
+            padding: 10px 0;
+            box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
         }
         .nav-button {
-            padding: 10px 15px;
+            padding: 12px 18px;
             background: green;
             color: white;
             border: none;
             cursor: pointer;
             font-size: 16px;
             border-radius: 5px;
+            width: 45%;
+            text-align: center;
         }
         .nav-button:hover {
             background: darkgreen;
@@ -78,13 +95,21 @@
             margin-top: 15px;
         }
         .bottom-nav button {
-            margin: 2px;
-            padding: 5px 10px;
+            margin: 4px;
+            padding: 10px;
             font-size: 14px;
             cursor: pointer;
             border: none;
             border-radius: 5px;
             background: #ddd;
+            width: 40px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .bottom-nav button.active {
+            background: green;
+            color: white;
+            border: 2px solid darkgreen;
         }
         .bottom-nav button:hover {
             background: #aaa;
@@ -101,12 +126,12 @@
         <div class="question-container" id="question-container"></div>
         <div class="options" id="options-container"></div>
 
-        <div class="nav-buttons">
-            <button class="nav-button" id="prev-btn">Prev</button>
-            <button class="nav-button" id="next-btn">Next</button>
-        </div>
-
         <div class="bottom-nav" id="num-nav"></div>
+    </div>
+
+    <div class="nav-buttons">
+        <button class="nav-button" id="prev-btn">Prev</button>
+        <button class="nav-button" id="next-btn">Next</button>
     </div>
 
     <script>
@@ -147,6 +172,7 @@
                     optionsContainer.appendChild(optionElement);
                 });
 
+                highlightActiveQuestion();
                 updateScore();
             }
 
@@ -179,6 +205,7 @@
                     const btn = document.createElement("button");
                     btn.textContent = i + 1;
                     btn.addEventListener("click", () => jumpToQuestion(i));
+                    btn.setAttribute("data-index", i);
                     numNav.appendChild(btn);
                 }
             }
@@ -186,6 +213,13 @@
             function jumpToQuestion(index) {
                 currentQuestionIndex = index;
                 displayQuestion();
+            }
+
+            function highlightActiveQuestion() {
+                document.querySelectorAll(".bottom-nav button").forEach(btn => {
+                    btn.classList.remove("active");
+                });
+                document.querySelector(`.bottom-nav button[data-index='${currentQuestionIndex}']`).classList.add("active");
             }
 
             document.getElementById("prev-btn").addEventListener("click", () => {
