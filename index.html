@@ -6,10 +6,12 @@
     <title>Repository Directory Listing</title>
     <style>
         body { font-family: Arial, sans-serif; padding: 20px; }
-        ul { list-style-type: none; padding: 0; }
-        li { margin: 5px 0; }
+        ul { list-style-type: none; padding-left: 20px; }
+        li { margin: 5px 0; cursor: pointer; }
         a { text-decoration: none; color: #007bff; }
         a:hover { text-decoration: underline; }
+        .folder { font-weight: bold; color: #333; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
@@ -21,34 +23,73 @@
         const repoOwner = "constantine768";  // Your GitHub username
         const repoName = "TestRepo.github.io"; // Your repository name
         const branch = "main"; // Change if using a different branch
-        const homeUrl = "https://constantine768.github.io/TestRepo.github.io/"; // Base URL for file links
+        const homeUrl = "https://constantine768.github.io/TestRepo.github.io/"; // Base URL
 
         async function fetchRepoContents(path = "") {
             const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`;
             try {
                 const response = await fetch(url);
                 if (!response.ok) throw new Error("Failed to fetch directory listing");
-                const data = await response.json();
-
-                const fileList = document.getElementById("file-list");
-                fileList.innerHTML = ""; // Clear loading text
-
-                data.forEach(file => {
-                    const li = document.createElement("li");
-
-                    // Construct correct URL for GitHub Pages
-                    const fileUrl = homeUrl + file.path;
-
-                    li.innerHTML = `<a href="${fileUrl}" target="_blank">${file.name}</a>`;
-                    fileList.appendChild(li);
-                });
+                return await response.json();
             } catch (error) {
-                document.getElementById("file-list").innerHTML = "Error loading directory.";
                 console.error(error);
+                return [];
             }
         }
 
-        fetchRepoContents();
+        async function buildFileTree(container, path = "") {
+            const items = await fetchRepoContents(path);
+            if (!items.length) return;
+
+            const ul = document.createElement("ul");
+
+            for (const item of items) {
+                const li = document.createElement("li");
+
+                if (item.type === "dir") {
+                    // Create a collapsible folder
+                    li.innerHTML = `<span class="folder">📁 ${item.name}</span>`;
+                    li.classList.add("folder-item");
+
+                    const subUl = document.createElement("ul");
+                    subUl.classList.add("hidden");
+                    li.appendChild(subUl);
+
+                    li.addEventListener("click", async (event) => {
+                        event.stopPropagation();
+                        if (subUl.childElementCount === 0) {
+                            await buildFileTree(subUl, item.path);
+                        }
+                        subUl.classList.toggle("hidden");
+                    });
+                } else {
+                    // Create a file link
+                    const fileUrl = homeUrl + item.path;
+                    li.innerHTML = `<a href="${fileUrl}" target="_blank">${item.name}</a>`;
+
+                    // Add to root-level list if it's an HTML file inside subfolders
+                    if (item.name.endsWith(".html") && path !== "") {
+                        const rootList = document.getElementById("html-files");
+                        const rootLi = document.createElement("li");
+                        rootLi.innerHTML = `<a href="${fileUrl}" target="_blank">${item.name} (from ${path})</a>`;
+                        rootList.appendChild(rootLi);
+                    }
+                }
+                ul.appendChild(li);
+            }
+            container.appendChild(ul);
+        }
+
+        async function init() {
+            const rootContainer = document.getElementById("file-list");
+            const htmlFileContainer = document.createElement("ul");
+            htmlFileContainer.id = "html-files";
+            rootContainer.appendChild(htmlFileContainer);
+
+            await buildFileTree(rootContainer);
+        }
+
+        init();
     </script>
 
 </body>
