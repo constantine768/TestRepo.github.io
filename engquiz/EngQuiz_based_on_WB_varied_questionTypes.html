@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: white;
+            margin: 20px auto;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .header {
+            background: #2d662d;
+            color: yellow;
+            font-size: 20px;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+        .score {
+            color: red;
+        }
+        .question-container {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .options {
+            margin: 10px 0;
+        }
+        .option {
+            display: block;
+            padding: 10px;
+            background: #f8f8f8;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .option input {
+            margin-right: 8px;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .nav-button {
+            padding: 10px 15px;
+            background: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .nav-button:hover {
+            background: darkgreen;
+        }
+        .bottom-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .bottom-nav button {
+            margin: 2px;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #ddd;
+        }
+        .bottom-nav button:hover {
+            background: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <span>English Quiz</span>
+            <span class="score">Score: <span id="score">0</span></span>
+        </div>
+
+        <!-- Question Section -->
+        <div class="question-container" id="question-container"></div>
+
+        <!-- Options Section -->
+        <div class="options" id="options-container"></div>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <button class="nav-button" id="prev-btn">Prev</button>
+            <button class="nav-button" id="next-btn">Next</button>
+        </div>
+
+        <!-- Number Navigation -->
+        <div class="bottom-nav" id="num-nav"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let currentQuestionIndex = 0;
+            let questions = [];
+            let score = 0;
+
+            async function loadQuestions() {
+                try {
+                    const response = await fetch("EngQuiz_based_on_WB_varied_questionTypes.json");
+                    questions = await response.json();
+                    displayQuestion();
+                    createNavButtons();
+                } catch (error) {
+                    console.error("Error loading questions:", error);
+                }
+            }
+
+            function displayQuestion() {
+                const questionContainer = document.getElementById("question-container");
+                const optionsContainer = document.getElementById("options-container");
+                questionContainer.innerHTML = "";
+                optionsContainer.innerHTML = "";
+
+                if (currentQuestionIndex >= questions.length) return;
+                const questionObj = questions[currentQuestionIndex];
+
+                questionContainer.innerHTML = `<p>${currentQuestionIndex + 1}. ${questionObj.question}</p>`;
+
+                switch (questionObj.question_type) {
+                    case "Fill in the Blanks":
+                        optionsContainer.innerHTML = `<input type="text" id="user-answer" class="option">`;
+                        break;
+
+                    case "Match the Following":
+                        questionObj.options.forEach((pair, index) => {
+                            optionsContainer.innerHTML += `
+                                <div class="option">
+                                    ${pair[0]} - 
+                                    <select id="match-${index}">
+                                        ${questionObj.matchOptions.map(opt => `<option value="${opt}">${opt}</option>`).join("")}
+                                    </select>
+                                </div>
+                            `;
+                        });
+                        break;
+
+                    case "Sentence Correction":
+                    case "Dialogue Correction":
+                        questionObj.options.forEach((option, index) => {
+                            optionsContainer.innerHTML += `
+                                <label class="option">
+                                    <input type="radio" name="answer" value="${index}"> ${option}
+                                </label>
+                            `;
+                        });
+                        break;
+
+                    case "Identify the Word Type":
+                    case "Root Word Identification":
+                    case "Synonyms and Antonyms":
+                    case "Preposition Usage":
+                        optionsContainer.innerHTML = `
+                            <select id="user-answer">
+                                ${questionObj.options.map(opt => `<option value="${opt}">${opt}</option>`).join("")}
+                            </select>
+                        `;
+                        break;
+
+                    case "Sentence Sequencing":
+                        optionsContainer.innerHTML = `
+                            <textarea id="user-answer" rows="3" class="option"></textarea>
+                        `;
+                        break;
+
+                    case "Verb Forms & Tense Identification":
+                        questionObj.options.forEach((option, index) => {
+                            optionsContainer.innerHTML += `
+                                <label class="option">
+                                    <input type="radio" name="answer" value="${index}"> ${option}
+                                </label>
+                            `;
+                        });
+                        break;
+                }
+            }
+
+            function createNavButtons() {
+                const numNav = document.getElementById("num-nav");
+                numNav.innerHTML = "";
+                for (let i = 0; i < questions.length; i++) {
+                    numNav.innerHTML += `<button onclick="jumpToQuestion(${i})">${i + 1}</button>`;
+                }
+            }
+
+            function jumpToQuestion(index) {
+                currentQuestionIndex = index;
+                displayQuestion();
+            }
+
+            document.getElementById("prev-btn").addEventListener("click", () => {
+                if (currentQuestionIndex > 0) {
+                    currentQuestionIndex--;
+                    displayQuestion();
+                }
+            });
+
+            document.getElementById("next-btn").addEventListener("click", () => {
+                if (currentQuestionIndex < questions.length - 1) {
+                    currentQuestionIndex++;
+                    displayQuestion();
+                }
+            });
+
+            loadQuestions();
+        });
+    </script>
+</body>
+</html>

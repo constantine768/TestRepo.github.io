@@ -1,0 +1,227 @@
+[
+  {
+    "question_type": "Fill in the Blanks",
+    "question": "Fill in the blank with the correct past tense verb: 'Poonam ___ all her homework and ___ to sleep.'",
+    "options": ["do, goes", "did, went", "does, gone"],
+    "correctIndex": 1
+  },
+  {
+    "question_type": "Fill in the Blanks",
+    "question": "Complete the sentence: 'The baby ___ loudly when it was hungry.'",
+    "options": ["cried", "crying", "cries"],
+    "correctIndex": 0
+  },
+  {
+    "question_type": "Fill in the Blanks",
+    "question": "Choose the correct verb: 'She ___ a beautiful picture yesterday.'",
+    "options": ["draw", "drawing", "drew"],
+    "correctIndex": 2
+  },
+  {
+    "question_type": "Match the Following",
+    "question": "Match the words with their meanings.",
+    "pairs": [
+      {"word": "Gigantic", "match": "Very big"},
+      {"word": "Timid", "match": "Shy"},
+      {"word": "Swift", "match": "Fast"}
+    ]
+  },
+  {
+    "question_type": "Match the Following",
+    "question": "Match the past tense forms correctly.",
+    "pairs": [
+      {"word": "Run", "match": "Ran"},
+      {"word": "Go", "match": "Went"},
+      {"word": "Take", "match": "Took"}
+    ]
+  },
+  {
+    "question_type": "Match the Following",
+    "question": "Match the objects with their functions.",
+    "pairs": [
+      {"word": "Scissors", "match": "Cutting"},
+      {"word": "Brush", "match": "Painting"},
+      {"word": "Microscope", "match": "Magnifying"}
+    ]
+  },
+  {
+    "question_type": "Sentence Correction",
+    "question": "Choose the correctly capitalized sentence.",
+    "options": [
+      "yesterday, my mom and i went to the theatre.",
+      "Yesterday, my Mom and I went to the Theatre.",
+      "Yesterday, my mom and I went to the theatre."
+    ],
+    "correctIndex": 2
+  },
+  {
+    "question_type": "Sentence Correction",
+    "question": "Choose the correct punctuation: 'where is my book'",
+    "options": [
+      "Where is my book.",
+      "Where is my book?",
+      "where is my book!"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "question_type": "Sentence Correction",
+    "question": "Select the correct sentence.",
+    "options": [
+      "my friend lives in new york.",
+      "My friend lives in New York.",
+      "My Friend Lives In New york."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "question_type": "Identify the Word Type",
+    "question": "Which word in the sentence 'She quickly finished her homework' is an adverb?",
+    "options": ["She", "Quickly", "Homework"],
+    "correctIndex": 1
+  },
+  {
+    "question_type": "Identify the Word Type",
+    "question": "Identify the noun in the sentence: 'The cat sleeps on the mat.'",
+    "options": ["Cat", "Sleeps", "On"],
+    "correctIndex": 0
+  },
+  {
+    "question_type": "Identify the Word Type",
+    "question": "Which of these words is a verb?",
+    "options": ["Table", "Jump", "Blue"],
+    "correctIndex": 1
+  },
+  {
+    "question_type": "Root Word Identification",
+    "question": "Identify the root word in 'peaceful'.",
+    "options": ["Peace", "Full", "Peaceful"],
+    "correctIndex": 0
+  },
+  {
+    "question_type": "Root Word Identification",
+    "question": "Find the root word of 'unhappy'.",
+    "options": ["Un", "Happy", "Unhappy"],
+    "correctIndex": 1
+  },
+  {
+    "question_type": "Root Word Identification",
+    "question": "What is the root word in 'darkness'?",
+    "options": ["Dark", "Ness", "Darkness"],
+    "correctIndex": 0
+  },
+  {
+    "question_type": "Synonyms and Antonyms",
+    "question": "What is the opposite of 'brave'?",
+    "options": ["Fearful", "Strong", "Happy"],
+    "correctIndex": 0
+  },
+  {
+    "question_type": "Synonyms and Antonyms",
+    "question": "Choose the synonym of 'happy'.",
+    "options": ["Sad", "Joyful", "Angry"],
+    "correctIndex": 1
+  },
+  {
+    "question_type": "Synonyms and Antonyms",
+    "question": "Which word means the same as 'gigantic'?",
+    "options": ["Tiny", "Huge", "Slow"],
+    "correctIndex": 1
+  },
+  {
+    "question_type": "Sentence Sequencing",
+    "question": "Arrange the events in the correct order.",
+    "sequence": [
+      "Tom woke up and got out of bed.",
+      "He brushed his teeth.",
+      "He ate his breakfast.",
+      "He went to school."
+    ]
+  },
+  {
+    "question_type": "Sentence Sequencing",
+    "question": "Sequence the story correctly.",
+    "sequence": [
+      "The cat saw a mouse.",
+      "The cat chased the mouse.",
+      "The mouse hid in a hole.",
+      "The cat waited outside."
+    ]
+  },
+  {
+    "question_type": "Sentence Sequencing",
+    "question": "Arrange the steps for making a sandwich.",
+    "sequence": [
+      "Take two slices of bread.",
+      "Spread butter on the bread.",
+      "Add vegetables and cheese.",
+      "Place the slices together and serve."
+    ]
+  },
+  {
+    "question_type": "Dialogue Correction",
+    "question": "Choose the correctly punctuated dialogue.",
+    "options": [
+      "Mom asked: 'Where are you going?'",
+      "Mom asked, 'Where are you going?'",
+      "Mom asked, Where are you going?"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "question_type": "Dialogue Correction",
+    "question": "Select the correct punctuation for the sentence.",
+    "options": [
+      "Jacob said 'We need more balloons.'",
+      "Jacob said, 'We need more balloons.'",
+      "Jacob said: We need more balloons."
+    ],
+    "correctIndex": 1
+  },
+  {
+    "question_type": "Dialogue Correction",
+    "question": "Which sentence has correct dialogue punctuation?",
+    "options": [
+      "'Where was the movie shot?' asked Karen.",
+      "'Where was the movie shot? asked Karen.'",
+      "'Where was the movie shot?', asked Karen."
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question_type": "Verb Forms & Tense Identification",
+    "question": "Circle the correct verb form: 'The children ___ in the pool all afternoon.'",
+    "options": ["Swim", "Swimming", "Swam"],
+    "correctIndex": 2
+  },
+  {
+    "question_type": "Verb Forms & Tense Identification",
+    "question": "Choose the correct past tense verb: 'She ___ to the market yesterday.'",
+    "options": ["Go", "Went", "Going"],
+    "correctIndex": 1
+  },
+  {
+    "question_type": "Verb Forms & Tense Identification",
+    "question": "Select the correct present continuous tense: 'He ___ a book now.'",
+    "options": ["Reads", "Reading", "Is reading"],
+    "correctIndex": 2
+  },
+  {
+    "question_type": "Preposition Usage",
+    "question": "Choose the correct preposition: 'The book is ___ the table.'",
+    "options": ["On", "Under", "Between"],
+    "correctIndex": 0
+  },
+  {
+    "question_type": "Preposition Usage",
+    "question": "Which preposition best fits? 'She walked ___ the park.'",
+    "options": ["Through", "Over", "Under"],
+    "correctIndex": 0
+  },
+  {
+    "question_type": "Preposition Usage",
+    "question": "Select the correct preposition: 'The ball rolled ___ the bed.'",
+    "options": ["Under", "Above", "On"],
+    "correctIndex": 0
+  }
+]
