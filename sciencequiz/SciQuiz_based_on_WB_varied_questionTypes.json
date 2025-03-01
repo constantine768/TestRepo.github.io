@@ -1,0 +1,324 @@
+{
+  "question_count": 31,
+  "questions": [
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "What type of teeth do herbivores have to chew the food?",
+      "options": [
+        "sharp and blunt teeth",
+        "flat and strong grinding teeth",
+        "pointed and sharp teeth",
+        "long and curved teeth"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "Which type of feathers help in keeping the bird warm?",
+      "options": [
+        "flight feathers",
+        "tail feathers",
+        "body feathers",
+        "down feathers"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "Identify the two main categories of materials based on their sources.",
+      "options": [
+        "solid materials and liquid materials",
+        "natural materials and man-made materials",
+        "hard materials and soft materials",
+        "organic materials and inorganic materials"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "How do snakes move from one place to another?",
+      "options": [
+        "by crawling",
+        "by rolling",
+        "by walking",
+        "by hopping"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "What makes the day brighter and hotter than night?",
+      "options": [
+        "light and heat energy from the moon",
+        "light and heat energy from the clouds",
+        "light and heat energy from the earth",
+        "light and heat energy from the sun"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "Identify the device shown in the image.",
+      "options": [
+        "solar cooker",
+        "solar torch",
+        "solar calculator",
+        "solar panel"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "The animal shown in the image is _______.",
+      "options": [
+        "a herbivore",
+        "an omnivore",
+        "a carnivore",
+        "a parasite"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "What type of beak do sparrows have?",
+      "options": [
+        "sharp and hooked beak",
+        "hard and chisel-shaped beak",
+        "short and horned beak",
+        "short and curved beak"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "The feathers obtained from chickens are used to make ___________.",
+      "options": [
+        "sacks",
+        "papers",
+        "utensils",
+        "shuttlecocks"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "How do birds fly?",
+      "options": [
+        "with the help of legs",
+        "with the help of wings",
+        "with the help of feathers",
+        "with the help of tail"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "Why do you think the bird needs these kinds of claws?",
+      "options": [
+        "to tear the flesh of the prey",
+        "to climb on trees",
+        "to hold onto branches",
+        "to scratch the soil in search of food"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "Raj prefers riding his bicycle for short distances instead of using a car. According to him, it is important to save petrol because:",
+      "options": [
+        "petrol is limited on the Earth.",
+        "petrol is found below the surface of the Earth.",
+        "petrol does not get exhausted easily.",
+        "petrol does not emit harmful gases."
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "Choose the correct reason for why the fan is not a living thing.",
+      "options": [
+        "Yes, it is a living thing as it moves.",
+        "Yes, it is a living thing as it moves on its own.",
+        "No, it is a non-living thing as it does not move on its own but uses electricity for its movement.",
+        "No, it is a non-living thing as it moves on its own."
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "Identify the material obtained from animals used to make jackets.",
+      "options": [
+        "cotton",
+        "leather",
+        "coir",
+        "jute"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "Choose the characteristic of living things shown in the given image.",
+      "options": [
+        "Living things can feel.",
+        "Living things can move.",
+        "Living things can grow.",
+        "Living things need food and water to live."
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "Which sequence represents a possible food chain in the forest?",
+      "options": [
+        "Ferns → Wolves → Deer",
+        "Deer → Ferns → Wolves",
+        "Deer → Wolves → Ferns",
+        "Ferns → Deer → Wolves"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "Why is the material chosen for making hangers?",
+      "options": [
+        "This is because it is lightweight and can easily float in water.",
+        "This is because it smells nice and makes the clothes fragrant.",
+        "This is because it is strong and can be moulded into any shape easily.",
+        "This is because it adds beauty to the wardrobe."
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "Identify the insect and the group to which it belongs.",
+      "options": [
+        "grasshopper: herbivore",
+        "mantis: carnivore",
+        "cockroach: omnivore",
+        "ant: omnivore"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "Select the correct statement regarding M and N.",
+      "options": [
+        "M is wind, N is Sun",
+        "M is wind, N is coal",
+        "M is coal, N is wind",
+        "M is petrol, N is water"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question_type": "Multiple Choice Questions",
+      "question": "Why do you think these birds travel only during the winter season?",
+      "options": [
+        "to swim in water",
+        "to lay their eggs",
+        "to find better food",
+        "to rest in a different place"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question_type": "True or False Questions",
+      "question": "The leaves of the touch-me-not plant do not curl when touched.",
+      "answer": "False"
+    },
+    {
+      "question_type": "Fill-in-the-Blank Questions",
+      "question": "Plants can sense sunlight, and they grow ______ it.",
+      "answer": "towards"
+    },
+    {
+      "question_type": "Correlation Questions",
+      "question": "proboscis: suck liquid food :: mandible : ______",
+      "answer": "cut and chew food"
+    },
+    {
+      "question_type": "Unscramble Word Questions",
+      "question": "Satish pours juice for his friends in a container made of _______. (asslg)",
+      "answer": "glass"
+    },
+    {
+      "question_type": "Riddle Questions",
+      "question": "I am produced by plants. I am released during photosynthesis. All living organisms use me for breathing. Who am I?",
+      "answer": "oxygen"
+    },
+    {
+      "question_type": "Short Answer Questions",
+      "question": "A deer runs away if it sees a lion coming. Give reason.",
+      "answer": "Running helps the deer to protect itself from the lion and being killed."
+    },
+    {
+      "question_type": "Short Answer Questions",
+      "question": "Complete the table with types of birds and examples.",
+      "table": [
+        {
+          "Type of birds": "climbing birds",
+          "Example of a bird": "woodpeckers"
+        },
+        {
+          "Type of birds": "perching birds",
+          "Example of a bird": "mynas"
+        },
+        {
+          "Type of birds": "swimming birds",
+          "Example of a bird": "swans"
+        },
+        {
+          "Type of birds": "wading birds",
+          "Example of a bird": "cranes"
+        }
+      ]
+    },
+    {
+      "question_type": "Short Answer Questions",
+      "question": "Differentiate the nests P and Q shown in terms of the bird’s name and the materials used to build them.",
+      "answer": "Nest P belongs to penguin, and it is built using pebbles and stones on the ground. On the other hand, nest Q belongs to a woodpecker, and it makes its nest by making a big hole in the tree trunk."
+    },
+    {
+      "question_type": "Long Answer Questions",
+      "question": "The teeth of an animal are shown in the image.  i. Which type of teeth does the animal have in the front? (1 Mark) ii. What is the use of such types of teeth in the animal? (2 Marks)",
+      "parts": [
+        {
+          "part": "i",
+          "answer": "The animal has long, sharp and pointed teeth in the front."
+        },
+        {
+          "part": "ii",
+          "answer": "Long, sharp and pointed teeth are used to tear the flesh or meat of other animals."
+        }
+      ]
+    },
+    {
+      "question_type": "Long Answer Questions",
+      "question": "Observe the image of a bamboo plant and answer the following questions: i. Name a material that is obtained from a bamboo plant. (1 Mark) ii. Mention any one use and property of the material. (2 Marks)",
+      "parts": [
+        {
+          "part": "i",
+          "answer": "paper"
+        },
+        {
+          "part": "ii",
+          "answer": "Use: it is used to make books. Property: it can be easily folded, bent and reshaped."
+        }
+      ]
+    },
+    {
+      "question_type": "Long Answer Questions",
+      "question": "Priya uses room light during the day, even though the room is bright enough. She is wasting energy. i. How can she conserve energy? (1 Mark) ii. Why is it important to conserve energy?  (2 Marks)",
+      "parts": [
+        {
+          "part": "i",
+          "answer": "She can conserve energy, that is, electricity, by switching off the room light when not required."
+        },
+        {
+          "part": "ii",
+          "answer": "Non-renewable sources of energy are easily exhausted and limited on the Earth. So, it is very important to conserve energy, so that the non-renewable sources of energy do not get exhausted."
+        }
+      ]
+    }
+  ]
+}

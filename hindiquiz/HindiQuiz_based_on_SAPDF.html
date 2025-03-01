@@ -46,6 +46,7 @@
             font-size: 18px;
             margin: 20px 0;
             font-weight: bold;
+            flex: 1; /* Ensure content area takes up space */
         }
 
         .option {
@@ -101,9 +102,17 @@
             display: none;
         }
 
-        .review-container {
+        .summary-container {
             display: none;
             margin-top: 20px;
+        }
+
+        .summary-container.enabled {
+            display: block;
+        }
+
+        .summary-container button {
+            margin: 10px;
         }
     </style>
 </head>
@@ -124,6 +133,13 @@
             <button class="dev-button" id="restart-btn">Restart</button>
             <button class="dev-button" id="skip-all-btn">Skip All</button>
         </div>
+        <div class="summary-container" id="summary-container">
+            <h3>Quiz Summary</h3>
+            <p id="questions-attempted"></p>
+            <p id="questions-skipped"></p>
+            <p id="final-score"></p>
+            <button class="dev-button" id="restart-summary-btn">Restart Quiz</button>
+        </div>
         <div class="review-container" id="review-container">
             <h3>Review Incorrect Answers</h3>
             <div id="review-content"></div>
@@ -136,6 +152,7 @@
         let score = 0;
         let incorrectAnswers = [];
         let developerMode = false;
+        let questionsSkipped = 0;
 
         document.addEventListener("keydown", (e) => {
             if (e.shiftKey && e.key === "D") {
@@ -169,7 +186,10 @@
             optionsContainer.innerHTML = "";
             questionContainer.innerHTML = "";
 
-            if (currentQuestionIndex >= questions.length) return;
+            if (currentQuestionIndex >= questions.length) {
+                showSummary();
+                return;
+            }
 
             const questionObj = questions[currentQuestionIndex];
             questionContainer.innerHTML = `<p>${currentQuestionIndex + 1}. ${questionObj.question}</p>`;
@@ -312,6 +332,7 @@
                 opt.style.pointerEvents = "auto";
                 opt.classList.remove("correct", "incorrect");
             });
+            questionsSkipped++;
             currentQuestionIndex++;
             displayQuestion();
         });
@@ -335,6 +356,7 @@
             currentQuestionIndex = 0;
             score = 0;
             incorrectAnswers = [];
+            questionsSkipped = 0;
             document.getElementById("score").textContent = "0";
             document.getElementById("review-container").style.display = "none";
             document.querySelectorAll(".option").forEach((opt) => {
@@ -355,8 +377,33 @@
             });
         });
 
+        document.getElementById("restart-summary-btn").addEventListener("click", () => {
+            currentQuestionIndex = 0;
+            score = 0;
+            incorrectAnswers = [];
+            questionsSkipped = 0;
+            document.getElementById("score").textContent = "0";
+            document.getElementById("summary-container").classList.remove("enabled");
+            document.getElementById("review-container").style.display = "none";
+            document.querySelectorAll(".option").forEach((opt) => {
+                opt.style.pointerEvents = "auto";
+                opt.classList.remove("correct", "incorrect");
+            });
+            loadQuestions(); // Reload questions to restart properly
+        });
+
         function shuffleArray(array) {
             return array.sort(() => Math.random() - 0.5);
+        }
+
+        function showSummary() {
+            document.getElementById("summary-container").classList.add("enabled");
+            document.getElementById("questions-attempted").textContent = `Attempted: ${questions.length - questionsSkipped}`;
+            document.getElementById("questions-skipped").textContent = `Skipped: ${questionsSkipped}`;
+            document.getElementById("final-score").textContent = `Final Score: ${score} / ${questions.length}`;
+            document.getElementById("prev-btn").disabled = true;
+            document.getElementById("next-btn").disabled = true;
+            document.getElementById("skip-btn").disabled = true;
         }
 
         loadQuestions();
