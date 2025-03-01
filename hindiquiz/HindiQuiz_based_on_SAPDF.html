@@ -155,7 +155,6 @@
 
             switch (questionObj.question_type) {
                 case "Multiple Choice":
-                case "Fill in the Blanks":
                     questionObj.options.forEach((option, index) => {
                         const optionElement = document.createElement("div");
                         optionElement.classList.add("option");
@@ -182,7 +181,6 @@
 
                 case "Short Answer":
                 case "Sentence Answer":
-                case "Sentence Completion":
                     const inputElement = document.createElement("input");
                     inputElement.type = "text";
                     inputElement.placeholder = "अपना उत्तर लिखें";
@@ -195,6 +193,21 @@
                         checkAnswer(null, userAnswer, questionObj.answer, questionObj.question_type);
                     });
                     optionsContainer.appendChild(submitButton);
+                    break;
+
+                case "Sentence Completion":
+                    const inputElementCompletion = document.createElement("input");
+                    inputElementCompletion.type = "text";
+                    inputElementCompletion.placeholder = "अपना उत्तर लिखें";
+                    optionsContainer.appendChild(inputElementCompletion);
+
+                    const submitButtonCompletion = document.createElement("button");
+                    submitButtonCompletion.textContent = "जमा करें";
+                    submitButtonCompletion.addEventListener("click", () => {
+                        const userAnswer = inputElementCompletion.value;
+                        checkAnswer(null, userAnswer, questionObj.answer, questionObj.question_type);
+                    });
+                    optionsContainer.appendChild(submitButtonCompletion);
                     break;
 
                 case "Image Based":
@@ -211,7 +224,7 @@
 
         function checkAnswer(optionElement, selectedAnswer, correctAnswer, questionType) {
             if (questionType === "multiple-choice" || questionType === "true-false") {
-                if (optionElement.classList.contains("correct") || optionElement.classList.contains("incorrect"))
+                if (optionElement && (optionElement.classList.contains("correct") || optionElement.classList.contains("incorrect")))
                     return;
 
                 document.querySelectorAll(".option").forEach((opt) => (opt.style.pointerEvents = "none"));
@@ -226,8 +239,10 @@
             } else {
                 const userAnswer = selectedAnswer; // Direct input from the user
                 const expectedAnswer = correctAnswer;
+                const normalizedUserAnswer = userAnswer.trim().toLowerCase();
+                const normalizedExpectedAnswer = expectedAnswer.trim().toLowerCase();
 
-                if (userAnswer.trim().toLowerCase() === expectedAnswer.trim().toLowerCase()) {
+                if (normalizedUserAnswer === normalizedExpectedAnswer) {
                     score++;
                 } else {
                     incorrectAnswers.push(questions[currentQuestionIndex]);

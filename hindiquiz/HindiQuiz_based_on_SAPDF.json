@@ -40,56 +40,64 @@
     "answer": true
   },
   {
-    "question_type": "Fill in the Blanks",
-    "question": "पैदल चलते समय ___ का प्रयोग करना चाहिए।",
+    "question_type": "Multiple Choice",
+    "question": "पैदल चलते समय _______ का प्रयोग करना चाहिए।",
     "options": ["फुटपाथ", "रोड", "जंक्शन", "सड़क"],
     "correctIndex": 0
   },
   {
-    "question_type": "Fill in the Blanks",
-    "question": "हमें यातायात के नियमों का ___ करना चाहिए।",
+    "question_type": "Multiple Choice",
+    "question": "हमें यातायात के नियमों का _______ करना चाहिए।",
     "options": ["स्वागत", "पालन", "अवहेलना", "भूल"],
     "correctIndex": 1
   },
   {
-    "question_type": "Short Answer",
+    "question_type": "Multiple Choice",
     "question": "चाँद हम पर क्या बरसाता है?",
-    "answer": "चाँदनी"
+    "options": ["धूप", "गर्मी", "चाँदनी", "पानी"],
+    "correctIndex": 2
   },
   {
-    "question_type": "Short Answer",
+    "question_type": "Multiple Choice",
     "question": "तारे कहाँ टिमटिमाते हैं?",
-    "answer": "आसमान में"
+    "options": ["धरती पर", "आसमान में", "पानी में", "कमरे में"],
+    "correctIndex": 1
   },
   {
-    "question_type": "Short Answer",
+    "question_type": "Multiple Choice",
     "question": "सड़क पर करते समय किसका उपयोग करना चाहिए?",
-    "answer": "ज़ेब्रा लाइन"
+    "options": ["गाड़ी", "ज़ेब्रा लाइन", "पत्थर", "मिट्टी"],
+    "correctIndex": 1
   },
   {
-    "question_type": "Sentence Answer",
+    "question_type": "Multiple Choice",
     "question": "मोटर साइकिल चलाते हुए हमें क्या पहनना चाहिए?",
-    "answer": "हेलमेट"
+    "options": ["टोपी", "दुपट्टा", "हेलमेट", "चश्मा"],
+    "correctIndex": 2
   },
   {
-    "question_type": "Sentence Answer",
+    "question_type": "Multiple Choice",
     "question": "पीली बत्ती जलते ही क्या होता है?",
-    "answer": "गाड़ी धीमी गति से चलने लगती है।"
+    "options": ["गाड़ी तेज चलती है", "गाड़ी रुक जाती है", "गाड़ी धीमी गति से चलने लगती है", "गाड़ी उड़ने लगती है"],
+    "correctIndex": 2
   },
   {
-    "question_type": "Short Answer",
+    "question_type": "Multiple Choice",
     "question": "जंगल में शेर जोर से दहाड़ा। वाक्य में आया क्रिया शब्द पहचानिए?",
-    "answer": "दहाड़ा"
+    "options": ["जंगल", "शेर", "में", "दहाड़ा"],
+    "correctIndex": 3
   },
   {
-    "question_type": "Sentence Answer",
+    "question_type": "Multiple Choice",
     "question": "आप कहां रहते हैं? वाक्य के अंत में सही विराम-चिह्न का प्रयोग कीजिए?",
-    "answer": "?"
+    "options": [".", ",", "?", "!"],
+    "correctIndex": 2
   },
   {
-    "question_type": "Sentence Answer",
+    "question_type": "Multiple Choice",
     "question": "किसी भी वाक्य के पूर्ण होने पर किस विराम-चिह्न का प्रयोग होता है?",
-    "answer": "पूर्ण विराम"
+    "options": ["पूर्ण विराम", "अल्प विराम", "प्रश्नवाचक चिह्न", "योजक चिह्न"],
+    "correctIndex": 0
   },
   {
     "question_type": "Multiple Choice",
@@ -109,29 +117,34 @@
     "answer": false
   },
   {
-    "question_type": "Sentence Answer",
+    "question_type": "Multiple Choice",
     "question": "हमें पूरा चंद्रमा कब दिखाई देता है?",
-    "answer": "पूर्णिमा की रात को"
+    "options": ["अमावस्या की रात को", "पूर्णिमा की रात को", "पहली रात को", "चौथी रात को"],
+    "correctIndex": 1
   },
   {
-    "question_type": "Sentence Answer",
+    "question_type": "Multiple Choice",
     "question": "ठंडी हवा क्या-क्या करती है?",
-    "answer": "हमारा मन बहलाती है, जीने के लिए शुद्ध श्वास देती है।"
+    "options": ["आग लगाती है, प्रदूषण फैलाती है", "हमारा मन बहलाती है, जीने के लिए शुद्ध श्वास देती है", "शोर मचाती है, धूल उड़ाती है", "बीमार करती है, नुकसान पहुंचाती है"],
+    "correctIndex": 1
   },
   {
-    "question_type": "Sentence Answer",
+    "question_type": "Multiple Choice",
     "question": "कार चलाते हुए सीट बेल्ट पहनना क्यों आवश्यक है?",
-    "answer": "कार चलाते हुए सीट बेल्ट जरूर लगाएं ताकि दुर्घटना के समय बेल्ट की मदद से चोट लगने से बचा जा सके।"
+    "options": ["क्योंकि यह फैशन है", "क्योंकि यह आरामदायक है", "ताकि दुर्घटना के समय बेल्ट की मदद से चोट लगने से बचा जा सके", "क्योंकि पुलिस ने कहा है"],
+    "correctIndex": 2
   },
   {
-    "question_type": "Sentence Answer",
+    "question_type": "Multiple Choice",
     "question": "आसमान में बादल गरज रहे थे। वाक्य में आए क्रिया शब्दों को छाँटिए?",
-    "answer": "गरज रहे थे।"
+    "options": ["आसमान", "बादल", "गरज रहे थे", "थे"],
+    "correctIndex": 2
   },
   {
-    "question_type": "Sentence Completion",
+    "question_type": "Multiple Choice",
     "question": "मछली ... है। (तैरती/तैर) सही क्रिया शब्द से वाक्य पूर्ण कीजिए?",
-    "answer": "तैरती"
+    "options": ["तैरती", "तैर", "तैरेगा", "तैरा"],
+    "correctIndex": 0
   },
   {
     "question_type": "Image Based",
@@ -139,28 +152,33 @@
     "answer": "हँसना"
   },
   {
-    "question_type": "Sentence Completion",
+    "question_type": "Multiple Choice",
     "question": "मैंने आज बहुत ... आम खाया। (रस/रसीला) सही विशेषण शब्द के प्रयोग से रिक्त स्थान पूर्ण कीजिए?",
-    "answer": "रसीला"
+    "options": ["रस", "रसीला", "खट्टा", "मीठा"],
+    "correctIndex": 1
   },
   {
-    "question_type": "Short Answer",
+    "question_type": "Multiple Choice",
     "question": "अभी ठंडी आइसक्रीम मत खाओ। वाक्य में आया विशेषण शब्द पहचानकर लिखिए?",
-    "answer": "ठंडी"
+    "options": ["अभी", "आइसक्रीम", "मत", "ठंडी"],
+    "correctIndex": 3
   },
   {
-    "question_type": "Short Answer",
+    "question_type": "Multiple Choice",
     "question": "मेरे पास जापानी गुड़िया है। वाक्य में आया विशेष्य पहचानकर लिखिए?",
-    "answer": "गुड़िया"
+    "options": ["मेरे", "पास", "जापानी", "गुड़िया"],
+    "correctIndex": 3
   },
   {
-    "question_type": "Short Answer",
+    "question_type": "Multiple Choice",
     "question": "दिए गए विराम-चिह्न का नाम लिखिए: ?",
-    "answer": "प्रश्नवाचक चिह्न"
+    "options": ["पूर्ण विराम", "अल्प विराम", "प्रश्नवाचक चिह्न", "विस्मयादिबोधक चिह्न"],
+    "correctIndex": 2
   },
   {
-    "question_type": "Short Answer",
+    "question_type": "Multiple Choice",
     "question": "आज मैं अपने गांव जाऊंगा। वाक्य में आए विराम-चिह्न का नाम लिखिए?",
-    "answer": "पूर्ण विराम चिह्न"
+    "options": ["पूर्ण विराम चिह्न", "अल्प विराम चिह्न", "प्रश्नवाचक चिह्न", "विस्मयादिबोधक चिह्न"],
+    "correctIndex": 0
   }
 ]
