@@ -1,0 +1,79 @@
+[
+  {
+    "question_type": "Multiple Choice",
+    "question": "‘प्रयास’ शब्द का अर्थ बताइए।",
+    "options": ["अपना", "परिवार", "अपने से अलग", "अपने-आप"],
+    "correctIndex": 2
+  },
+  {
+    "question_type": "Multiple Choice",
+    "question": "पृथ्वी से हमें कौन-सी चीज़ें नहीं मिलती हैं?",
+    "options": ["हवा", "जल", "फल", "दूध"],
+    "correctIndex": 3
+  },
+  {
+    "question_type": "Multiple Choice",
+    "question": "‘पैदल चलने के पथ’ को अंग्रेज़ी में क्या कहते हैं?",
+    "options": ["Safe", "Road", "Footpath", "Walk path"],
+    "correctIndex": 2
+  },
+  {
+    "question_type": "Multiple Choice",
+    "question": "किस रंग की बत्ती जलते ही गाड़ियाँ रुक जाती हैं?",
+    "options": ["पीली", "नीली", "हरी", "लाल"],
+    "correctIndex": 3
+  },
+  {
+    "question_type": "Multiple Choice",
+    "question": "कौन-सा विकल्प क्रिया शब्द नहीं है?",
+    "options": ["रोना", "चिड़िया", "खिलाना", "नाचना"],
+    "correctIndex": 1
+  },
+  {
+    "question_type": "True or False",
+    "question": "नदी के जल से हमारी प्यास बुझती है।",
+    "answer": true
+  },
+  {
+    "question_type": "True or False",
+    "question": "पेड़ सभी को प्राणवायु देता है।",
+    "answer": true
+  },
+  {
+    "question_type": "Fill in the Blanks",
+    "question": "पैदल चलते समय ___ का प्रयोग करना चाहिए।",
+    "options": ["फुटपाथ", "रोड", "जंक्शन", "सड़क"],
+    "correctIndex": 0
+  },
+  {
+    "question_type": "Fill in the Blanks",
+    "question": "हमें यातायात के नियमों का ___ करना चाहिए।",
+    "options": ["स्वागत", "पालन", "अवहेलना", "भूल"],
+    "correctIndex": 1
+  },
+  {
+    "question_type": "Short Answer",
+    "question": "चाँद हम पर क्या बरसाता है?",
+    "answer": "चाँदनी"
+  },
+  {
+    "question_type": "Short Answer",
+    "question": "तारे कहाँ टिमटिमाते हैं?",
+    "answer": "आसमान में"
+  },
+  {
+    "question_type": "Short Answer",
+    "question": "सड़क पर करते समय किसका उपयोग करना चाहिए?",
+    "answer": "ज़ेब्रा लाइन"
+  },
+  {
+    "question_type": "Sentence Answer",
+    "question": "मोटर साइकिल चलाते हुए हमें क्या पहनना चाहिए?",
+    "answer": "हेलमेट"
+  },
+  {
+    "question_type": "Sentence Answer",
+    "question": "पीली बत्ती जलते ही क्या होता है?",
+    "answer": "गाड़ी धीमी गति से चलने लगती है।"
+  }
+]
