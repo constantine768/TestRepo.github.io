@@ -19,6 +19,8 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
         }
         .header {
             background: #2d662d;
@@ -88,12 +90,13 @@
         <div class="options" id="options-container"></div>
         <div class="nav-buttons">
             <button class="nav-button" id="prev-btn">Previous</button>
+            <button class="nav-button" id="skip-btn">Skip</button>
             <button class="nav-button" id="next-btn">Next</button>
         </div>
         <div class="dev-buttons" id="dev-buttons">
             <button class="dev-button" id="review-btn">Review</button>
             <button class="dev-button" id="restart-btn">Restart</button>
-            <button class="dev-button" id="skip-btn">Skip All</button>
+            <button class="dev-button" id="skip-all-btn">Skip All</button>
         </div>
         <div class="review-container" id="review-container">
             <h3>Review Incorrect Answers</h3>
@@ -158,8 +161,37 @@
         }
 
         function updateScore() {
-            document.getElementById("score").textContent = ((score / questions.length) * 100).toFixed(2);
+            document.getElementById("score").textContent = ((score / (currentQuestionIndex + 1)) * 100).toFixed(2);
         }
+
+        document.getElementById("next-btn").addEventListener("click", () => {
+            document.querySelectorAll(".option").forEach(opt => {
+                opt.style.pointerEvents = "auto";
+                opt.classList.remove("correct", "incorrect");
+            });
+            currentQuestionIndex++;
+            displayQuestion();
+        });
+
+        document.getElementById("prev-btn").addEventListener("click", () => {
+            if (currentQuestionIndex > 0) {
+                document.querySelectorAll(".option").forEach(opt => {
+                    opt.style.pointerEvents = "auto";
+                    opt.classList.remove("correct", "incorrect");
+                });
+                currentQuestionIndex--;
+                displayQuestion();
+            }
+        });
+
+        document.getElementById("skip-btn").addEventListener("click", () => {
+            document.querySelectorAll(".option").forEach(opt => {
+                opt.style.pointerEvents = "auto";
+                opt.classList.remove("correct", "incorrect");
+            });
+            currentQuestionIndex++;
+            displayQuestion();
+        });
 
         document.getElementById("review-btn").addEventListener("click", () => {
             const reviewContainer = document.getElementById("review-container");
@@ -174,6 +206,30 @@
                 });
             }
             reviewContainer.style.display = "block";
+        });
+
+        document.getElementById("restart-btn").addEventListener("click", () => {
+            currentQuestionIndex = 0;
+            score = 0;
+            incorrectAnswers = [];
+            document.getElementById("score").textContent = "0";
+            document.getElementById("review-container").style.display = "none";
+            document.querySelectorAll(".option").forEach(opt => {
+                opt.style.pointerEvents = "auto";
+                opt.classList.remove("correct", "incorrect");
+            });
+            displayQuestion();
+        });
+
+        document.getElementById("skip-all-btn").addEventListener("click", () => {
+            currentQuestionIndex = questions.length;
+            document.getElementById("review-container").style.display = "block";
+            const reviewContent = document.getElementById("review-content");
+            reviewContent.innerHTML = "";
+            reviewContent.innerHTML = "<p>Quiz skipped. Reviewing all questions.</p>";
+            questions.forEach(q => {
+                reviewContent.innerHTML += `<p><strong>${q.question}</strong><br>Correct Answer: <span style='color: green;'>${q.options[q.correctIndex]}</span></p>`;
+            });
         });
 
         function shuffleArray(array) {
