@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="hi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +10,9 @@
             background-color: #f2f2f2;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .container {
@@ -23,6 +25,7 @@
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
+            flex: 1; /* Allow the container to take up remaining vertical space */
         }
 
         .header {
@@ -70,6 +73,12 @@
             display: flex;
             justify-content: space-between;
             margin-top: 10px;
+            position: sticky;
+            bottom: 0;
+            background-color: #f2f2f2;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .nav-button,
@@ -133,6 +142,18 @@
                 developerMode = !developerMode;
                 document.getElementById("dev-buttons").style.display = developerMode ? "flex" : "none";
             }
+
+            if (e.key === "n" || e.key === "N") {
+                document.getElementById("next-btn").click();
+            }
+
+            if (e.key === "p" || e.key === "P") {
+                document.getElementById("prev-btn").click();
+            }
+
+            if (e.key === "s" || e.key === "S") {
+                document.getElementById("skip-btn").click();
+            }
         });
 
         async function loadQuestions() {
@@ -155,15 +176,20 @@
 
             switch (questionObj.question_type) {
                 case "Multiple Choice":
-                    questionObj.options.forEach((option, index) => {
-                        const optionElement = document.createElement("div");
-                        optionElement.classList.add("option");
-                        optionElement.textContent = option;
-                        optionElement.addEventListener("click", () =>
-                            checkAnswer(optionElement, index, questionObj.correctIndex, "multiple-choice")
-                        );
-                        optionsContainer.appendChild(optionElement);
-                    });
+                case "Fill in the Blanks":
+                    if (questionObj.options && Array.isArray(questionObj.options)) {
+                        questionObj.options.forEach((option, index) => {
+                            const optionElement = document.createElement("div");
+                            optionElement.classList.add("option");
+                            optionElement.textContent = option;
+                            optionElement.addEventListener("click", () =>
+                                checkAnswer(optionElement, index, questionObj.correctIndex, "multiple-choice")
+                            );
+                            optionsContainer.appendChild(optionElement);
+                        });
+                    } else {
+                        optionsContainer.innerHTML = "<p>Error: Options not found for this question.</p>";
+                    }
                     break;
 
                 case "True or False":
@@ -223,6 +249,8 @@
         }
 
         function checkAnswer(optionElement, selectedAnswer, correctAnswer, questionType) {
+            let isCorrect = false;
+
             if (questionType === "multiple-choice" || questionType === "true-false") {
                 if (optionElement && (optionElement.classList.contains("correct") || optionElement.classList.contains("incorrect")))
                     return;
@@ -231,22 +259,25 @@
 
                 if (selectedAnswer == correctAnswer) {
                     optionElement.classList.add("correct");
-                    score++;
+                    isCorrect = true;
                 } else {
                     optionElement.classList.add("incorrect");
-                    incorrectAnswers.push(questions[currentQuestionIndex]);
                 }
             } else {
                 const userAnswer = selectedAnswer; // Direct input from the user
-                const expectedAnswer = correctAnswer;
+                const expectedAnswer = String(correctAnswer);
                 const normalizedUserAnswer = userAnswer.trim().toLowerCase();
                 const normalizedExpectedAnswer = expectedAnswer.trim().toLowerCase();
 
                 if (normalizedUserAnswer === normalizedExpectedAnswer) {
-                    score++;
-                } else {
-                    incorrectAnswers.push(questions[currentQuestionIndex]);
+                    isCorrect = true;
                 }
+            }
+
+            if (isCorrect) {
+                score++;
+            } else {
+                incorrectAnswers.push(questions[currentQuestionIndex]);
             }
 
             updateScore();
