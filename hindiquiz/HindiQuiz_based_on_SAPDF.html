@@ -74,6 +74,10 @@
         .dev-buttons {
             display: none;
         }
+        .review-container {
+            display: none;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -90,6 +94,10 @@
             <button class="dev-button" id="review-btn">Review</button>
             <button class="dev-button" id="restart-btn">Restart</button>
             <button class="dev-button" id="skip-btn">Skip All</button>
+        </div>
+        <div class="review-container" id="review-container">
+            <h3>Review Incorrect Answers</h3>
+            <div id="review-content"></div>
         </div>
     </div>
 
@@ -145,11 +153,6 @@
             } else {
                 optionElement.classList.add("incorrect");
                 incorrectAnswers.push(questions[currentQuestionIndex]);
-                document.querySelectorAll(".option").forEach(opt => {
-                    if (opt.textContent === questions[currentQuestionIndex].options[correctIndex]) {
-                        opt.classList.add("correct");
-                    }
-                });
             }
             updateScore();
         }
@@ -158,18 +161,19 @@
             document.getElementById("score").textContent = ((score / questions.length) * 100).toFixed(2);
         }
 
-        document.getElementById("prev-btn").addEventListener("click", () => {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                displayQuestion();
+        document.getElementById("review-btn").addEventListener("click", () => {
+            const reviewContainer = document.getElementById("review-container");
+            const reviewContent = document.getElementById("review-content");
+            reviewContent.innerHTML = "";
+            
+            if (incorrectAnswers.length === 0) {
+                reviewContent.innerHTML = "<p>Great job! No incorrect answers.</p>";
+            } else {
+                incorrectAnswers.forEach(q => {
+                    reviewContent.innerHTML += `<p><strong>${q.question}</strong><br>Correct Answer: <span style='color: green;'>${q.options[q.correctIndex]}</span></p>`;
+                });
             }
-        });
-
-        document.getElementById("next-btn").addEventListener("click", () => {
-            if (currentQuestionIndex < questions.length - 1) {
-                currentQuestionIndex++;
-                displayQuestion();
-            }
+            reviewContainer.style.display = "block";
         });
 
         function shuffleArray(array) {
