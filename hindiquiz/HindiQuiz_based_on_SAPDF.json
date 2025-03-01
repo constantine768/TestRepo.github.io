@@ -75,5 +75,92 @@
     "question_type": "Sentence Answer",
     "question": "पीली बत्ती जलते ही क्या होता है?",
     "answer": "गाड़ी धीमी गति से चलने लगती है।"
+  },
+  {
+    "question_type": "Short Answer",
+    "question": "जंगल में शेर जोर से दहाड़ा। वाक्य में आया क्रिया शब्द पहचानिए?",
+    "answer": "दहाड़ा"
+  },
+  {
+    "question_type": "Sentence Answer",
+    "question": "आप कहां रहते हैं? वाक्य के अंत में सही विराम-चिह्न का प्रयोग कीजिए?",
+    "answer": "?"
+  },
+  {
+    "question_type": "Sentence Answer",
+    "question": "किसी भी वाक्य के पूर्ण होने पर किस विराम-चिह्न का प्रयोग होता है?",
+    "answer": "पूर्ण विराम"
+  },
+  {
+    "question_type": "Multiple Choice",
+    "question": "दिए गए विकल्पों में से विशेषण शब्द पहचानिए?",
+    "options": ["करेला", "गरम", "टमाटर", "शरबत"],
+    "correctIndex": 1
+  },
+    {
+    "question_type": "Multiple Choice",
+    "question": "विशेषण शब्दों के सही समूह को पहचानिए?",
+    "options": ["लड़का, स्वेटर, पेड़", "अमरूद, गिलहरी, धरती", "विद्यालय, नीम, कोआ", "पतली, भारी, मुलायम"],
+    "correctIndex": 3
+  },
+  {
+    "question_type": "True or False",
+    "question": "पेड़ सभी को पराया मानता है?",
+    "answer": false
+  },
+  {
+    "question_type": "Sentence Answer",
+    "question": "हमें पूरा चंद्रमा कब दिखाई देता है?",
+    "answer": "पूर्णिमा की रात को"
+  },
+  {
+    "question_type": "Sentence Answer",
+    "question": "ठंडी हवा क्या-क्या करती है?",
+    "answer": "हमारा मन बहलाती है, जीने के लिए शुद्ध श्वास देती है।"
+  },
+  {
+    "question_type": "Sentence Answer",
+    "question": "कार चलाते हुए सीट बेल्ट पहनना क्यों आवश्यक है?",
+    "answer": "कार चलाते हुए सीट बेल्ट जरूर लगाएं ताकि दुर्घटना के समय बेल्ट की मदद से चोट लगने से बचा जा सके।"
+  },
+  {
+    "question_type": "Sentence Answer",
+    "question": "आसमान में बादल गरज रहे थे। वाक्य में आए क्रिया शब्दों को छाँटिए?",
+    "answer": "गरज रहे थे।"
+  },
+  {
+    "question_type": "Sentence Completion",
+    "question": "मछली ... है। (तैरती/तैर) सही क्रिया शब्द से वाक्य पूर्ण कीजिए?",
+    "answer": "तैरती"
+  },
+  {
+    "question_type": "Image Based",
+    "question": "चित्र देखकर हो रही क्रिया को पहचानकर लिखिए?",
+    "answer": "हँसना"
+  },
+  {
+    "question_type": "Sentence Completion",
+    "question": "मैंने आज बहुत ... आम खाया। (रस/रसीला) सही विशेषण शब्द के प्रयोग से रिक्त स्थान पूर्ण कीजिए?",
+    "answer": "रसीला"
+  },
+  {
+    "question_type": "Short Answer",
+    "question": "अभी ठंडी आइसक्रीम मत खाओ। वाक्य में आया विशेषण शब्द पहचानकर लिखिए?",
+    "answer": "ठंडी"
+  },
+  {
+    "question_type": "Short Answer",
+    "question": "मेरे पास जापानी गुड़िया है। वाक्य में आया विशेष्य पहचानकर लिखिए?",
+    "answer": "गुड़िया"
+  },
+  {
+    "question_type": "Short Answer",
+    "question": "दिए गए विराम-चिह्न का नाम लिखिए: ?",
+    "answer": "प्रश्नवाचक चिह्न"
+  },
+  {
+    "question_type": "Short Answer",
+    "question": "आज मैं अपने गांव जाऊंगा। वाक्य में आए विराम-चिह्न का नाम लिखिए?",
+    "answer": "पूर्ण विराम चिह्न"
   }
 ]
