@@ -108,7 +108,7 @@
         });
 
         async function loadQuestions() {
-            const response = await fetch("hindi_quiz.json");
+            const response = await fetch("HindiQuiz_based_on_SAPDF.json");
             questions = await response.json();
             questions = shuffleArray(questions);
             displayQuestion();
