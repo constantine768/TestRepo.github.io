@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Image Prompt Builder</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a clean look */
+        body {
+            font-family: "Inter", sans-serif;
+        }
+        /* Basic spinner for loading indication */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen bg-gray-100 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
+        <div class="bg-white rounded-lg shadow-xl p-6 sm:p-8 w-full max-w-4xl">
+            <h1 class="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-6">Gemini Image Prompt Builder</h1>
+
+            <!-- Model Selection Dropdown -->
+            <div class="mb-6">
+                <label for="model-select" class="block text-gray-700 text-lg font-medium mb-2">Select Model:</label>
+                <select id="model-select" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800">
+                    <!-- Options will be dynamically loaded by JavaScript -->
+                </select>
+            </div>
+
+            <!-- Base Prompt Input -->
+            <div class="mb-6">
+                <label for="base-prompt-input" class="block text-gray-700 text-lg font-medium mb-2">Base Prompt:</label>
+                <input type="text" id="base-prompt-input" placeholder="e.g., A majestic dragon flying over a mountain..." class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800">
+            </div>
+
+            <!-- Current Prompt Display -->
+            <div class="mb-6 p-4 bg-blue-50 border-l-4 border-blue-400 text-blue-800 rounded-lg shadow-sm">
+                <h2 class="text-xl font-semibold mb-2">Current Combined Prompt:</h2>
+                <p id="current-prompt-display" class="font-mono text-gray-900 break-words"></p>
+            </div>
+
+            <!-- Keyword Buttons Container -->
+            <div id="keyword-buttons-container" class="mb-8">
+                <!-- Buttons will be dynamically loaded here by JavaScript -->
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-6">
+                <button id="generate-image-button" class="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 w-full sm:w-auto">
+                    Generate Image
+                </button>
+                <button id="reset-button" class="bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gray-300 w-full sm:w-auto">
+                    Reset All
+                </button>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="loading-indicator" class="hidden text-center mt-6">
+                <div class="animate-spin inline-block w-8 h-8 border-4 border-t-4 border-blue-500 border-opacity-75 rounded-full"></div>
+                <p class="text-gray-600 mt-2">Generating image...</p>
+            </div>
+
+            <!-- Message Box for errors/feedback -->
+            <div id="message-box" class="mt-6 p-3 text-sm text-red-700 bg-red-100 border border-red-400 rounded-lg hidden" role="alert">
+                <!-- Error messages will appear here -->
+            </div>
+
+            <!-- Generated Image Display and Download Button -->
+            <div class="mt-8 text-center p-4 border border-gray-200 rounded-lg bg-gray-50 flex flex-col items-center justify-center min-h-[200px]">
+                <div id="generated-image" class="mb-4">
+                    <p class="text-gray-500">Your generated image will appear here.</p>
+                </div>
+                <button id="download-image-button" class="hidden bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full shadow-md transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-300">
+                    Download Image
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module">
+        // Import Firebase modules for initialization and authentication
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        // Global variables provided by the Canvas environment for Firebase setup
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let app;
+        let auth;
+
+        // Function to initialize Firebase and authenticate the user
+        async function initializeFirebase() {
+            try {
+                // Initialize Firebase app with the provided configuration
+                app = initializeApp(firebaseConfig);
+                // Get the authentication instance
+                auth = getAuth(app);
+
+                // Sign in with a custom token if provided, otherwise sign in anonymously
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                    console.log("Firebase: Signed in with custom token.");
+                } else {
+                    await signInAnonymously(auth);
+                    console.log("Firebase: Signed in anonymously.");
+                }
+            } catch (error) {
+                console.error("Firebase initialization or sign-in error:", error);
+                // Display error message to the user in the message box
+                const messageBox = document.getElementById('message-box');
+                messageBox.innerText = "Error initializing application. Please check console for details.";
+                messageBox.classList.remove('hidden');
+            }
+        }
+
+        // --- Keyword Data for Prompt Building ---
+        // This object holds all the categories and their associated keywords.
+        // Each keyword will be rendered as a clickable button.
+        const keywordCategories = {
+            "Style/Artistic Medium": [
+                "oil painting", "watercolor", "pencil sketch", "digital art", "concept art",
+                "photorealistic", "anime", "cartoon", "pixel art", "stained glass",
+                "traditional Indian miniature painting", "impressionistic", "abstract",
+                "surrealistic", "pop art", "baroque", "renaissance"
+            ],
+            "Lighting": [
+                "soft light", "dramatic chiaroscuro", "golden hour lighting", "backlit",
+                "studio lighting", "dusk light", "moonlight", "harsh shadows", "diffused light",
+                "rim light", "volumetric lighting", "cinematic lighting", "natural light"
+            ],
+            "Color Palette": [
+                "vibrant colors", "monochromatic", "sepia tones", "pastel colors",
+                "dark and moody colors", "bright and cheerful", "earthy tones", "cool tones",
+                "warm tones", "analogous colors", "complementary colors", "desaturated",
+                "high contrast", "low contrast"
+            ],
+            "Composition/Shot Type": [
+                "full body shot", "close-up", "wide shot", "dramatic angle", "low-angle shot",
+                "eye-level shot", "symmetrical composition", "rule of thirds", "leading lines",
+                "Dutch angle", "overhead shot", "extreme close-up", "medium shot",
+                "establishing shot", "focus on foreground", "focus on background"
+            ],
+            "Detail Level/Complexity": [
+                "highly detailed", "minimalist", "simple lines", "intricate patterns",
+                "sparse background", "fine details", "rough textures", "smooth surfaces",
+                "complex scene", "clean lines", "abstract forms", "geometric patterns",
+                "organic shapes"
+            ],
+            "Resolution/Quality": [
+                "high resolution", "4K quality", "8K", "crisp details", "ultra-detailed",
+                "photorealistic quality", "sharp focus", "blurry background", "grainy", "pixelated"
+            ],
+            "Texture": [
+                "rough texture", "smooth surface", "glossy finish", "fabric texture",
+                "metallic sheen", "gritty", "bumpy", "silky", "wooden", "stone", "glass",
+                "watery", "furry"
+            ],
+            "Atmosphere/Mood": [
+                "serene atmosphere", "intense mood", "dreamy", "eerie", "peaceful", "dynamic",
+                "solemn", "joyful", "melancholy", "mysterious", "calm", "chaotic", "heroic",
+                "romantic", "futuristic", "vintage", "grungy", "clean"
+            ],
+            "Perspective": [
+                "bird's-eye view", "worm's-eye view", "first-person perspective",
+                "third-person perspective", "isometric view", "forced perspective",
+                "depth of field", "shallow depth of field", "wide-angle view", "telephoto view"
+            ],
+            "Camera Lens/Effect": [
+                "bokeh effect", "shallow depth of field", "wide-angle lens", "fisheye lens",
+                "telephoto lens", "macro lens", "tilt-shift", "lens flare", "vignette",
+                "film grain", "HDR", "double exposure", "motion blur"
+            ],
+            "Time of Day/Weather": [
+                "sunrise", "sunset", "midday", "night", "dawn", "dusk", "clear sky",
+                "stormy", "rainy", "snowy", "foggy", "misty", "overcast", "windy", "sunny",
+                "cloudy", "rainbow"
+            ],
+            "Setting/Environment": [
+                "urban cityscape", "lush forest", "desert landscape", "futuristic laboratory",
+                "ancient ruins", "cozy cottage", "space station", "underwater world",
+                "mountain peak", "beach", "village", "castle interior", "throne room",
+                "battlefield", "marketplace", "riverbank", "volcanic landscape"
+            ],
+            "Subject Action/Emotion": [
+                "running", "jumping", "sitting", "smiling", "crying", "fierce", "calm",
+                "contemplative", "heroic pose", "action shot", "portrait", "gazing",
+                "standing proudly", "meditating", "speaking", "listening", "fighting",
+                "flying", "dancing"
+            ]
+        };
+
+        // Available image generation models
+        const availableModels = [
+            { id: "imagen-3.0-generate-002", name: "Imagen 3.0" },
+            { id: "imagen-3.0-fast-generate-001", name: "Imagen 3.0 Fast" },
+            { id: "imagen-4.0-generate-preview-06-06", name: "Imagen 4.0 Preview" },
+            { id: "imagen-4.0-ultra-generate-preview-06-06", name: "Imagen 4.0 Ultra Preview" },
+            { id: "imagen-4.0-fast-generate-preview-06-06", name: "Imagen 4.0 Fast Preview" }
+        ];
+
+        // A Set to store currently selected keywords, ensuring uniqueness.
+        let selectedKeywords = new Set();
+        let currentGeneratedImageUrl = null; // Store the URL of the last generated image
+
+        /**
+         * Populates the model selection dropdown with available models.
+         */
+        function populateModelDropdown() {
+            const modelSelect = document.getElementById('model-select');
+            modelSelect.innerHTML = ''; // Clear existing options
+
+            availableModels.forEach(model => {
+                const option = document.createElement('option');
+                option.value = model.id;
+                option.innerText = model.name;
+                modelSelect.appendChild(option);
+            });
+        }
+
+        /**
+         * Dynamically renders keyword buttons based on the `keywordCategories` data.
+         * Attaches event listeners to toggle selection and update the prompt preview.
+         */
+        function renderKeywordButtons() {
+            const keywordsContainer = document.getElementById('keyword-buttons-container');
+            keywordsContainer.innerHTML = ''; // Clear any existing buttons
+
+            for (const category in keywordCategories) {
+                // Create a div for each category
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = "mb-6 p-4 bg-gray-50 rounded-lg shadow-inner";
+
+                // Create a title for the category
+                const categoryTitle = document.createElement('h3');
+                categoryTitle.className = "text-xl font-semibold text-gray-800 mb-3 border-b pb-2";
+                categoryTitle.innerText = category;
+                categoryDiv.appendChild(categoryTitle);
+
+                // Create a div to hold the buttons for the current category
+                const buttonsDiv = document.createElement('div');
+                buttonsDiv.className = "flex flex-wrap gap-2";
+
+                // Loop through each keyword in the current category
+                keywordCategories[category].forEach(keyword => {
+                    const button = document.createElement('button');
+                    button.innerText = keyword;
+                    // Apply default Tailwind classes for buttons
+                    button.className = "px-4 py-2 text-sm font-medium rounded-full border border-gray-300 text-gray-700 bg-white hover:bg-gray-100 transition-colors duration-200 shadow-sm";
+                    button.setAttribute('data-keyword', keyword); // Store keyword as a data attribute
+
+                    // Add click event listener to each button
+                    button.addEventListener('click', () => {
+                        // Toggle keyword selection
+                        if (selectedKeywords.has(keyword)) {
+                            selectedKeywords.delete(keyword);
+                            // Remove active styling
+                            button.classList.remove('bg-blue-500', 'text-white', 'hover:bg-blue-600', 'border-blue-500');
+                            button.classList.add('bg-white', 'text-gray-700', 'hover:bg-gray-100', 'border-gray-300');
+                        } else {
+                            selectedKeywords.add(keyword);
+                            // Apply active styling
+                            button.classList.add('bg-blue-500', 'text-white', 'hover:bg-blue-600', 'border-blue-500');
+                            button.classList.remove('bg-white', 'text-gray-700', 'hover:bg-gray-100', 'border-gray-300');
+                        }
+                        // Update the prompt preview whenever a keyword is toggled
+                        updatePromptPreview();
+                    });
+                    buttonsDiv.appendChild(button); // Add button to the buttons container
+                });
+                categoryDiv.appendChild(buttonsDiv); // Add buttons container to the category div
+                keywordsContainer.appendChild(categoryDiv); // Add category div to the main keywords container
+            }
+        }
+
+        /**
+         * Updates the displayed combined prompt based on the base prompt input
+         * and the currently selected keywords.
+         */
+        function updatePromptPreview() {
+            const basePrompt = document.getElementById('base-prompt-input').value.trim();
+            const currentPromptDisplay = document.getElementById('current-prompt-display');
+            // Combine base prompt and selected keywords, separated by a comma and space
+            const fullPrompt = `${basePrompt} ${Array.from(selectedKeywords).join(', ')}`.trim();
+            currentPromptDisplay.innerText = fullPrompt;
+        }
+
+        /**
+         * Calls the Gemini API to generate an image based on the provided prompt text.
+         * Handles loading states, success display, and error reporting.
+         * @param {string} promptText The full prompt string to send to the API.
+         */
+        async function generateImage(promptText) {
+            const messageBox = document.getElementById('message-box');
+            const imageContainer = document.getElementById('generated-image');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const downloadButton = document.getElementById('download-image-button');
+            const modelSelect = document.getElementById('model-select');
+            const selectedModel = modelSelect.value; // Get the selected model ID
+
+            // Clear previous messages and image, hide message box and download button
+            messageBox.classList.add('hidden');
+            messageBox.innerText = '';
+            imageContainer.innerHTML = '<p class="text-gray-500">Your generated image will appear here.</p>'; // Reset image placeholder
+            downloadButton.classList.add('hidden'); // Hide download button
+            loadingIndicator.classList.remove('hidden'); // Show loading indicator
+
+            try {
+                // Prepare the payload for the Gemini API call
+                const payload = {
+                    instances: { prompt: promptText },
+                    parameters: { "sampleCount": 1 } // Request one image
+                };
+                // API key will be provided by the Canvas runtime environment
+                const apiKey = "";
+                // Construct the API URL using the selected model
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${selectedModel}:predict?key=${apiKey}`;
+
+                // Make the API fetch request
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                // Check if the response was successful
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`API error: ${response.status} - ${errorData.error ? errorData.error.message : 'Unknown error'}`);
+                }
+
+                const result = await response.json();
+
+                // Check if image data is present in the response
+                if (result.predictions && result.predictions.length > 0 && result.predictions[0].bytesBase64Encoded) {
+                    const imageUrl = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
+                    currentGeneratedImageUrl = imageUrl; // Store the URL for download
+                    const imgElement = document.createElement('img');
+                    imgElement.src = imageUrl;
+                    imgElement.alt = "Generated Image";
+                    // Tailwind classes for responsive image styling
+                    imgElement.className = "max-w-full h-auto rounded-lg shadow-md border border-gray-200";
+                    imageContainer.innerHTML = ''; // Clear placeholder
+                    imageContainer.appendChild(imgElement); // Display the image
+                    downloadButton.classList.remove('hidden'); // Show download button
+
+                    // After successful image generation, reset the prompt-building elements
+                    resetPromptBuildingElements();
+
+                } else {
+                    messageBox.innerText = "No image data received or unexpected response format from the API.";
+                    messageBox.classList.remove('hidden');
+                    downloadButton.classList.add('hidden'); // Ensure download button is hidden
+                }
+            } catch (error) {
+                console.error("Error generating image:", error);
+                messageBox.innerText = `Failed to generate image: ${error.message}. Please check console for more details.`;
+                messageBox.classList.remove('hidden'); // Show error message
+                downloadButton.classList.add('hidden'); // Ensure download button is hidden
+            } finally {
+                loadingIndicator.classList.add('hidden'); // Always hide loading indicator
+            }
+        }
+
+        /**
+         * Resets all prompt building elements (base prompt, selected keywords)
+         * and clears the generated image display and message box.
+         */
+        function resetPromptBuildingElements() {
+            // Reset base prompt input
+            document.getElementById('base-prompt-input').value = '';
+
+            // Clear selected keywords and update button styles
+            selectedKeywords.clear();
+            const keywordButtons = document.querySelectorAll('#keyword-buttons-container button');
+            keywordButtons.forEach(button => {
+                button.classList.remove('bg-blue-500', 'text-white', 'hover:bg-blue-600', 'border-blue-500');
+                button.classList.add('bg-white', 'text-gray-700', 'hover:bg-gray-100', 'border-gray-300');
+            });
+
+            // Update prompt preview to reflect the reset
+            updatePromptPreview();
+
+            // Clear generated image and hide download button
+            document.getElementById('generated-image').innerHTML = '<p class="text-gray-500">Your generated image will appear here.</p>';
+            document.getElementById('download-image-button').classList.add('hidden');
+            currentGeneratedImageUrl = null; // Clear stored image URL
+
+            // Hide and clear message box
+            document.getElementById('message-box').classList.add('hidden');
+            document.getElementById('message-box').innerText = '';
+        }
+
+
+        // --- Event Listeners and Initial Setup ---
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Initialize Firebase first
+            await initializeFirebase();
+
+            // Populate the model dropdown
+            populateModelDropdown();
+
+            // Render all keyword buttons when the DOM is fully loaded
+            renderKeywordButtons();
+
+            // Add input event listener to the base prompt input field
+            document.getElementById('base-prompt-input').addEventListener('input', updatePromptPreview);
+
+            // Add click event listener to the "Generate Image" button
+            document.getElementById('generate-image-button').addEventListener('click', async () => {
+                const promptToGenerate = document.getElementById('current-prompt-display').innerText.trim();
+                if (promptToGenerate) {
+                    await generateImage(promptToGenerate);
+                } else {
+                    const messageBox = document.getElementById('message-box');
+                    messageBox.innerText = "Please enter a base prompt or select some keywords before generating an image.";
+                    messageBox.classList.remove('hidden');
+                }
+            });
+
+            // Add click event listener for the download button
+            document.getElementById('download-image-button').addEventListener('click', () => {
+                if (currentGeneratedImageUrl) {
+                    const a = document.createElement('a'); // Create a temporary anchor element
+                    a.href = currentGeneratedImageUrl; // Set its href to the image data URL
+                    a.download = 'generated-image.png'; // Set the download filename
+                    document.body.appendChild(a); // Append to body (required for Firefox)
+                    a.click(); // Programmatically click the anchor to trigger download
+                    document.body.removeChild(a); // Remove the temporary element
+                } else {
+                    const messageBox = document.getElementById('message-box');
+                    messageBox.innerText = "No image available to download.";
+                    messageBox.classList.remove('hidden');
+                }
+            });
+
+            // Add click event listener for the reset button
+            document.getElementById('reset-button').addEventListener('click', resetPromptBuildingElements);
+
+
+            // Perform an initial update of the prompt preview
+            updatePromptPreview();
+        });
+    </script>
+</body>
+</html>
