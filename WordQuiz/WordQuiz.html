@@ -67,43 +67,52 @@
     <button onclick="showHint()">Hint</button>
   </div>
 
-  <script>
-    let currentLevel = 0;
-    let guessedWords = [];
-    let currentInput = '';
-    let currentLetters = '';
-    let validWords = [];
+ <script>
+  let currentLevel = 0;
+  let guessedWords = [];
+  let currentInput = '';
+  let currentLetters = '';
+  let validWords = [];
 
-    const wordGrid = document.getElementById('wordGrid');
-    const letterCircle = document.getElementById('letterCircle');
-    const inputBox = document.getElementById('currentInput');
-    const levelDisplay = document.getElementById('level');
+  const wordGrid = document.getElementById('wordGrid');
+  const letterCircle = document.getElementById('letterCircle');
+  const inputBox = document.getElementById('currentInput');
+  const levelDisplay = document.getElementById('level');
 
-    function saveProgress() {
-      localStorage.setItem('wordGameProgress', JSON.stringify({ level: currentLevel }));
+  function saveProgress() {
+    localStorage.setItem('wordGameProgress', JSON.stringify({ level: currentLevel }));
+  }
+
+  function loadProgress() {
+    const progress = JSON.parse(localStorage.getItem('wordGameProgress'));
+    if (progress) {
+      currentLevel = progress.level || 0;
     }
+  }
 
-    function loadProgress() {
-      const progress = JSON.parse(localStorage.getItem('wordGameProgress'));
-      if (progress) {
-        currentLevel = progress.level || 0;
-      }
+  function getRandomLetters(length = 6) {
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
     }
+    return result;
+  }
 
-    function getRandomLetters(length = 6) {
-      const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      let result = '';
-      for (let i = 0; i < length; i++) {
-        result += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-      }
-      return result;
-    }
+  // Temporary fallback words for demo/testing
+  function fallbackWords(letters) {
+    const sampleWords = ['TREE', 'TEAR', 'RATE', 'EATER', 'REAR', 'ART', 'RAT', 'EAR', 'ARE', 'TEA'];
+    return sampleWords.filter(word =>
+      word.length >= 3 &&
+      [...word].every(char => letters.includes(char))
+    );
+  }
 
-    async function generateWords(letters) {
+  async function generateWords(letters) {
+    try {
       const permutations = new Set();
       const fetches = [];
 
-      // Use Datamuse API for patterns starting with each letter
       for (let c of letters) {
         fetches.push(
           fetch(`https://api.datamuse.com/words?sp=${c}?????&max=1000`).then(r => r.json())
@@ -122,98 +131,119 @@
         }
       });
 
-      return Array.from(permutations).slice(0, 10); // Limit to 10 words max
+      const words = Array.from(permutations);
+      return words.length ? words.slice(0, 10) : fallbackWords(letters);
+    } catch (err) {
+      console.warn("Falling back due to API failure:", err);
+      return fallbackWords(letters);
     }
+  }
 
-    async function buildLevel() {
-      guessedWords = [];
-      currentInput = '';
+  async function buildLevel() {
+    guessedWords = [];
+    currentInput = '';
+    currentLetters = getRandomLetters();
+    validWords = await generateWords(currentLetters);
+
+    while (validWords.length < 4) {
       currentLetters = getRandomLetters();
-
       validWords = await generateWords(currentLetters);
-      while (validWords.length < 4) {
-        currentLetters = getRandomLetters();
-        validWords = await generateWords(currentLetters);
-      }
-
-      renderLevel();
     }
 
-    function renderLevel() {
-      levelDisplay.textContent = currentLevel + 1;
-      wordGrid.innerHTML = '';
-      inputBox.textContent = '';
+    renderLevel();
+  }
 
-      validWords.forEach(word => {
-        const wordPlaceholder = document.createElement('div');
-        wordPlaceholder.textContent = '_ '.repeat(word.length);
-        wordGrid.appendChild(wordPlaceholder);
+  function renderLevel() {
+    levelDisplay.textContent = currentLevel + 1;
+    wordGrid.innerHTML = '';
+    inputBox.textContent = '';
+
+    validWords.forEach(word => {
+      const wordPlaceholder = document.createElement('div');
+      wordPlaceholder.textContent = '_ '.repeat(word.length);
+      wordGrid.appendChild(wordPlaceholder);
+    });
+
+    letterCircle.innerHTML = '';
+    currentLetters.split('').forEach(letter => {
+      const letterDiv = document.createElement('div');
+      letterDiv.className = 'letter';
+      letterDiv.textContent = letter;
+      letterDiv.dataset.letter = letter;
+      letterDiv.addEventListener('click', () => {
+        currentInput += letter;
+        inputBox.textContent = currentInput;
+      });
+      letterCircle.appendChild(letterDiv);
+    });
+
+    enableTouchEvents(); // for mobile
+  }
+
+  function submitWord() {
+    const submitted = currentInput.toUpperCase();
+
+    if (validWords.includes(submitted) && !guessedWords.includes(submitted)) {
+      guessedWords.push(submitted);
+      updateGrid();
+      if (guessedWords.length === validWords.length) {
+        currentLevel++;
+        saveProgress();
+        buildLevel();
+      }
+    } else {
+      alert('Incorrect or already guessed word!');
+    }
+
+    currentInput = '';
+    inputBox.textContent = '';
+  }
+
+  function updateGrid() {
+    wordGrid.innerHTML = '';
+    validWords.forEach(word => {
+      const div = document.createElement('div');
+      div.textContent = guessedWords.includes(word) ? word : '_ '.repeat(word.length);
+      wordGrid.appendChild(div);
+    });
+  }
+
+  function showHint() {
+    const hintWord = validWords.find(w => !guessedWords.includes(w));
+    if (hintWord) {
+      alert('Hint: starts with "' + hintWord.charAt(0) + '"');
+    }
+  }
+
+  function enableTouchEvents() {
+    let selected = [];
+
+    letterCircle.querySelectorAll('.letter').forEach(el => {
+      el.addEventListener('touchstart', e => {
+        currentInput = el.textContent;
+        inputBox.textContent = currentInput;
+        selected = [el];
       });
 
-      letterCircle.innerHTML = '';
-      currentLetters.split('').forEach(letter => {
-        const letterDiv = document.createElement('div');
-        letterDiv.className = 'letter';
-        letterDiv.textContent = letter;
-        letterDiv.dataset.letter = letter;
-        letterCircle.appendChild(letterDiv);
-      });
-
-      enableSwipe();
-    }
-
-    function submitWord() {
-      if (validWords.includes(currentInput.toUpperCase()) && !guessedWords.includes(currentInput.toUpperCase())) {
-        guessedWords.push(currentInput.toUpperCase());
-        guessedWords.forEach((word, idx) => {
-          const wordDiv = wordGrid.children[idx];
-          wordDiv.textContent = word;
-        });
-        if (guessedWords.length === validWords.length) {
-          currentLevel++;
-          saveProgress();
-          buildLevel();
-        }
-      } else {
-        alert('Incorrect or already used word!');
-      }
-      currentInput = '';
-      inputBox.textContent = '';
-    }
-
-    function showHint() {
-      const hintWord = validWords.find(w => !guessedWords.includes(w));
-      if (hintWord) alert('Hint: ' + hintWord.charAt(0) + '...');
-    }
-
-    function enableSwipe() {
-      let selected = [];
-
-      letterCircle.querySelectorAll('.letter').forEach(el => {
-        el.addEventListener('touchstart', e => {
-          currentInput = el.textContent;
+      el.addEventListener('touchmove', e => {
+        const touch = e.touches[0];
+        const element = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (element && element.classList.contains('letter') && !selected.includes(element)) {
+          selected.push(element);
+          currentInput += element.textContent;
           inputBox.textContent = currentInput;
-          selected = [el];
-        });
-
-        el.addEventListener('touchmove', e => {
-          const touch = e.touches[0];
-          const element = document.elementFromPoint(touch.clientX, touch.clientY);
-          if (element && element.classList.contains('letter') && !selected.includes(element)) {
-            selected.push(element);
-            currentInput += element.textContent;
-            inputBox.textContent = currentInput;
-          }
-        });
-
-        el.addEventListener('touchend', () => {
-          submitWord();
-        });
+        }
       });
-    }
 
-    loadProgress();
-    buildLevel();
-  </script>
+      el.addEventListener('touchend', () => {
+        submitWord();
+      });
+    });
+  }
+
+  loadProgress();
+  buildLevel();
+</script>
+
 </body>
 </html>
