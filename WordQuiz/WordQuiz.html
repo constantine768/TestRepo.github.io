@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Word Connect Game</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('forest.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      text-align: center;
+      touch-action: manipulation;
+    }
+    .container {
+      padding: 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .letter-circle {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      user-select: none;
+    }
+    .letter {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: rgba(0,0,0,0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .input-box {
+      font-size: 24px;
+      margin: 10px auto;
+      border: 2px solid white;
+      background-color: rgba(0,0,0,0.5);
+      width: 200px;
+      padding: 10px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Word Connect - Level <span id="level">1</span></h1>
+    <div id="wordGrid" class="grid"></div>
+    <div class="input-box" id="currentInput"></div>
+    <div class="letter-circle" id="letterCircle"></div>
+    <button onclick="submitWord()">Submit</button>
+    <button onclick="showHint()">Hint</button>
+  </div>
+
+  <script>
+    let currentLevel = 0;
+    let guessedWords = [];
+    let currentInput = '';
+    let currentLetters = '';
+    let validWords = [];
+
+    const wordGrid = document.getElementById('wordGrid');
+    const letterCircle = document.getElementById('letterCircle');
+    const inputBox = document.getElementById('currentInput');
+    const levelDisplay = document.getElementById('level');
+
+    function saveProgress() {
+      localStorage.setItem('wordGameProgress', JSON.stringify({ level: currentLevel }));
+    }
+
+    function loadProgress() {
+      const progress = JSON.parse(localStorage.getItem('wordGameProgress'));
+      if (progress) {
+        currentLevel = progress.level || 0;
+      }
+    }
+
+    function getRandomLetters(length = 6) {
+      const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      let result = '';
+      for (let i = 0; i < length; i++) {
+        result += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+      }
+      return result;
+    }
+
+    async function generateWords(letters) {
+      const permutations = new Set();
+      const fetches = [];
+
+      // Use Datamuse API for patterns starting with each letter
+      for (let c of letters) {
+        fetches.push(
+          fetch(`https://api.datamuse.com/words?sp=${c}?????&max=1000`).then(r => r.json())
+        );
+      }
+
+      const results = await Promise.all(fetches);
+      results.flat().forEach(wordObj => {
+        const word = wordObj.word.toUpperCase();
+        if (
+          word.length >= 4 &&
+          [...word].every(ch => letters.includes(ch)) &&
+          word.match(/^[A-Z]+$/)
+        ) {
+          permutations.add(word);
+        }
+      });
+
+      return Array.from(permutations).slice(0, 10); // Limit to 10 words max
+    }
+
+    async function buildLevel() {
+      guessedWords = [];
+      currentInput = '';
+      currentLetters = getRandomLetters();
+
+      validWords = await generateWords(currentLetters);
+      while (validWords.length < 4) {
+        currentLetters = getRandomLetters();
+        validWords = await generateWords(currentLetters);
+      }
+
+      renderLevel();
+    }
+
+    function renderLevel() {
+      levelDisplay.textContent = currentLevel + 1;
+      wordGrid.innerHTML = '';
+      inputBox.textContent = '';
+
+      validWords.forEach(word => {
+        const wordPlaceholder = document.createElement('div');
+        wordPlaceholder.textContent = '_ '.repeat(word.length);
+        wordGrid.appendChild(wordPlaceholder);
+      });
+
+      letterCircle.innerHTML = '';
+      currentLetters.split('').forEach(letter => {
+        const letterDiv = document.createElement('div');
+        letterDiv.className = 'letter';
+        letterDiv.textContent = letter;
+        letterDiv.dataset.letter = letter;
+        letterCircle.appendChild(letterDiv);
+      });
+
+      enableSwipe();
+    }
+
+    function submitWord() {
+      if (validWords.includes(currentInput.toUpperCase()) && !guessedWords.includes(currentInput.toUpperCase())) {
+        guessedWords.push(currentInput.toUpperCase());
+        guessedWords.forEach((word, idx) => {
+          const wordDiv = wordGrid.children[idx];
+          wordDiv.textContent = word;
+        });
+        if (guessedWords.length === validWords.length) {
+          currentLevel++;
+          saveProgress();
+          buildLevel();
+        }
+      } else {
+        alert('Incorrect or already used word!');
+      }
+      currentInput = '';
+      inputBox.textContent = '';
+    }
+
+    function showHint() {
+      const hintWord = validWords.find(w => !guessedWords.includes(w));
+      if (hintWord) alert('Hint: ' + hintWord.charAt(0) + '...');
+    }
+
+    function enableSwipe() {
+      let selected = [];
+
+      letterCircle.querySelectorAll('.letter').forEach(el => {
+        el.addEventListener('touchstart', e => {
+          currentInput = el.textContent;
+          inputBox.textContent = currentInput;
+          selected = [el];
+        });
+
+        el.addEventListener('touchmove', e => {
+          const touch = e.touches[0];
+          const element = document.elementFromPoint(touch.clientX, touch.clientY);
+          if (element && element.classList.contains('letter') && !selected.includes(element)) {
+            selected.push(element);
+            currentInput += element.textContent;
+            inputBox.textContent = currentInput;
+          }
+        });
+
+        el.addEventListener('touchend', () => {
+          submitWord();
+        });
+      });
+    }
+
+    loadProgress();
+    buildLevel();
+  </script>
+</body>
+</html>
